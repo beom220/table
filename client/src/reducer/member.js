@@ -10,7 +10,7 @@ const initialState = {
     logoutSuccess : false,
 }
 
-// action type
+/* action type */
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -19,6 +19,7 @@ export const LOGOUT_REQUEST = 'LOGIN_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGIN_FAILURE';
 
+/* action func */
 export const loginReqAction = () => ({ type : LOGIN_REQUEST });
 export const loginSuccess = (user) => ({ type : LOGIN_SUCCESS, user })
 export const loginFailure = () => ({ type : LOGIN_FAILURE });
@@ -27,7 +28,7 @@ export const logoutReqAction = () => ({ type : LOGOUT_REQUEST });
 
 export default function member(state = initialState, action){
     switch (action.type) {
-        // login
+        /* login */
         case LOGIN_REQUEST :
             return {
                 ...state,
@@ -49,7 +50,7 @@ export default function member(state = initialState, action){
                 loginFailure: action.error
             }
 
-        // logut
+        /* logout */
         case LOGOUT_REQUEST :
             return {
                 ...state,

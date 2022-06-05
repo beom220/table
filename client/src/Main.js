@@ -4,9 +4,8 @@ import {useSelector} from "react-redux";
 
 
 export default function Main(props) {
-    const { loginSuccess, user } = useSelector(state => state.member);
-    console.log(loginSuccess)
-    console.log(user)
+    const { user } = useSelector(state => state.member);
+    console.log(props.isLogin)
     if (!props.isLogin) {
         return (
             <>
@@ -14,7 +13,7 @@ export default function Main(props) {
                 <Link to="/login">
                     <li>로그인</li>
                 </Link>
-                <Link to="/Register">
+                <Link to="/register">
                     <li>회원가입</li>
                 </Link>
             </>
@@ -28,6 +27,9 @@ export default function Main(props) {
             <ul>
                 <Link to="/logout">
                     <li>로그아웃</li>
+                </Link>
+                <Link to="/register">
+                    <li>회원가입</li>
                 </Link>
             </ul>
         </>

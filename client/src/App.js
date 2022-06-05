@@ -15,9 +15,9 @@ export default function App(props) {
         <div className="app">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/Welcome" element={<Welcome isLogin={loginSuccess}/>}/>
-                    <Route path="/Login" element={<LoginContainer isLogin={loginSuccess}/>}/>
-                    <Route path="/Register" element={<Register isLogin={loginSuccess}/>}/>
+                    <Route path="/welcome" element={<Welcome isLogin={loginSuccess}/>}/>
+                    <Route path="/login" element={<LoginContainer isLogin={loginSuccess}/>}/>
+                    <Route path="/register" element={<Register isLogin={loginSuccess}/>}/>
                     <Route path="/" exact element={<Main isLogin={loginSuccess}/>}/>
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
