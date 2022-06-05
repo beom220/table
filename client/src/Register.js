@@ -6,8 +6,11 @@ export default function Register(props) {
     const navigate = useNavigate();
 
     useEffect(()=> {
-        if(props.isLogin) navigate('/');
-    }, [props.isLogin])
+        if(props.isLogin) {
+            alert('you cannot access');
+            return navigate('/');
+        }
+    }, [])
 
     const today = () => {
         const year = new Date().getFullYear();
@@ -16,7 +19,6 @@ export default function Register(props) {
         return year + month + date;
     };
 
-    const [modal, setModal] = useState(false);
     const [inputs, setInputs] = useState({
         name: '',
         email: '',
@@ -37,25 +39,66 @@ export default function Register(props) {
         });
     }
 
-
+    const [modal, setModal] = useState(false);
     const controlModal = () => {
         setModal(false);
     }
+
+    const formCheck = () => {
+        const name = /^[가-힣]{2,20}$/; /* 한글만 */
+        const nickname = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{4,12}$/; /* 4 ~ 12 자 한글포함 */
+        const password = /^[a-zA-Z0-9`~!@#$%^&*()\-_=+]{8,20}$/; /* 8 ~ 20 자 특수문자,숫자,영어허용*/
+        const birth = /^[12]\d{7}$/; /* 숫자만 8자 */
+        const phone = /^(01)[01679]\d{3,4}\d{4}$/; /* 숫자만 */
+        const email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+        if(!name.test(inputs.name)) {
+            alert('name 삐빅')
+            return false;
+        }
+        if(!nickname.test(inputs.nickname)) {
+            alert('nickname 삐빅');
+            return false;
+        }
+        if(!password.test(inputs.password)) {
+            alert('pwd 삐빅');
+            return false;
+        }
+        if(!birth.test(inputs.birth)) {
+            alert('birth 삐빅');
+            return false;
+        }
+        if(!phone.test(inputs.phone)) {
+            alert('phone 삐빅');
+            return false;
+        }
+        if(!email.test(inputs.email)) {
+            alert('email 삐빅');
+            return false;
+        }
+        if(!email.test(inputs.uEmail)) {
+            alert('uEmail 삐빅');
+            return false;
+        }
+        console.log('all pass');
+        return true;
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(inputs)
-        axios.post('http://localhost:3001/register', inputs)
-            .then(res => {
-                if (!res.data.success) {
-                    console.log(res.data);
-                    return setModal(true)
-                }
-                if (res.data.success) {
-                    return navigate('/');
-                }
-            })
+        if(formCheck()){
+            axios.post('/register', inputs)
+                .then(res => {
+                    if (!res.data.success) {
+                        console.log(res.data);
+                        return setModal(true)
+                    }
+                    if (res.data.success) {
+                        return navigate('/');
+                    }
+                })
+        }
     }
-    // TODO form value Check
 
     return (
         <>
@@ -73,6 +116,7 @@ export default function Register(props) {
             <Modal modal={modal} onClick={controlModal}/>
         </>
     )
+
 }
 
 function Modal(props) {
