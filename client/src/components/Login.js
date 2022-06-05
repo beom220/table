@@ -1,17 +1,13 @@
 import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {loginFailure} from "../reducer/member";
 
 export default function Login({loginReq, login, loginFailed, loading}) {
-
     const navigate = useNavigate();
-
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
     });
-
 
     const onChange = e => {
         const {value, name} = e.target;
@@ -26,18 +22,12 @@ export default function Login({loginReq, login, loginFailed, loading}) {
         loginReq();
         axios.post('/member/login', inputs)
             .then(res => {
-                const {user} = res.data;
-                return login(user)
-            })
-            .then(data => {
-                console.log(data)
-                return data.user;
-            })
-            .then(user => {
-                if (!loginFailed()) {
+                const {user, success} = res.data;
+                if(!success){
                     loginFailed();
-                    return alert('error')
+                    return alert('wrong info');
                 }
+                login(user);
                 navigate('/');
             })
             .catch(error => {
@@ -62,5 +52,4 @@ export default function Login({loginReq, login, loginFailed, loading}) {
             <p>Loading...</p>
         </>
     )
-
 }
