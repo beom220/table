@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
     let { password } = post;
 
     if (!name || !email || !password || !birth || !phone || !nickname || !uEmail ) {
-        res.send({
+        return res.send({
             success: false,
             message: 'something wrong'
         })
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
 
         const user = rows.filter(row => row.email === email);
         if (!!user.length) {
-             res.send({
+             return res.send({
                 success: false,
                 message: 'already used'
             });
