@@ -1,11 +1,39 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import {useSelector} from "react-redux";
+import React, {useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import axios from "axios";
+import {logoutFailure, logoutReqAction, logoutSuccess} from "./reducer/member";
 
 
 export default function Main(props) {
-    const { user } = useSelector(state => state.member);
-    console.log(props.isLogin)
+    const navigate = useNavigate();
+    const {user, logoutLoading} = useSelector(state => state.member);
+
+    const dispatch = useDispatch();
+    const logoutReq = () => dispatch(logoutReqAction());
+    const logout = () => dispatch(logoutSuccess());
+    const logoutFailed = () => dispatch(logoutFailure());
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        logoutReq();
+        try {
+            const res = await axios.get('/member/logout');
+            const { success } = res.data;
+
+            if (!success) {
+                console.log('Err ', success)
+                return logoutFailed();
+            }
+            console.log('Success ', success);
+            logout();
+            return navigate('/');
+        } catch (err) {
+            logoutFailed();
+            console.error(err.message);
+        }
+    }
+
     if (!props.isLogin) {
         return (
             <>
@@ -20,18 +48,15 @@ export default function Main(props) {
         );
     }
 
+    if (logoutLoading) {
+        return <p>waiting...</p>
+    }
+
     return (
         <>
             <h2>안녕하세요</h2>
             <p>{user.nickname}님</p>
-            <ul>
-                <Link to="/logout">
-                    <li>로그아웃</li>
-                </Link>
-                <Link to="/register">
-                    <li>회원가입</li>
-                </Link>
-            </ul>
+            <button type="submit" onClick={onSubmit}>로그아웃</button>
         </>
     );
 

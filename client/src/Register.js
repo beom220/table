@@ -84,19 +84,21 @@ export default function Register(props) {
         return true;
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        if(formCheck()){
-            axios.post('/register', inputs)
-                .then(res => {
-                    if (!res.data.success) {
-                        console.log(res.data);
-                        return setModal(true)
-                    }
-                    if (res.data.success) {
-                        return navigate('/');
-                    }
-                })
+        if(!formCheck()) return false;
+
+        try {
+            const res = await axios.post('/register', inputs);
+            const {success} = res.data;
+
+            if(!success){
+                console.log(success);
+                return setModal(true);
+            }
+            return navigate('/');
+        } catch (err) {
+            console.error(err.message);
         }
     }
 
@@ -112,6 +114,7 @@ export default function Register(props) {
                 <input type="email" name="uEmail" placeholder='이메일을 입력해주세요' onChange={onChange}/>
                 <input type="text" name="agreeAt" value={inputs.agreeAt} readOnly/>
                 <button type="submit">가입</button>
+                <button type="button" onClick={() => navigate(-1)}>뒤로가기</button>
             </form>
             <Modal modal={modal} onClick={controlModal}/>
         </>
