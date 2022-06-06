@@ -39,11 +39,6 @@ export default function Register(props) {
         });
     }
 
-    const [modal, setModal] = useState(false);
-    const controlModal = () => {
-        setModal(false);
-    }
-
     const formCheck = () => {
         const name = /^[가-힣]{2,20}$/; /* 한글만 */
         const nickname = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{4,12}$/; /* 4 ~ 12 자 한글포함 */
@@ -84,18 +79,20 @@ export default function Register(props) {
         return true;
     }
 
+    // TODO 생성한 정보로 로그인하기
     const onSubmit = async (e) => {
         e.preventDefault();
         if(!formCheck()) return false;
 
         try {
             const res = await axios.post('/register', inputs);
-            const {success} = res.data;
+            const {success, message} = res.data;
 
             if(!success){
                 console.log(success);
-                return setModal(true);
+                return alert(message);
             }
+            alert(message);
             return navigate('/');
         } catch (err) {
             console.error(err.message);
@@ -119,51 +116,6 @@ export default function Register(props) {
                 <button type="submit" className='emphasis'>회원가입</button>
                 <button type="button" className='secondary' onClick={() => navigate(-1)}>뒤로가기</button>
             </form>
-            <Modal modal={modal} onClick={controlModal}/>
         </div>
     )
-
-}
-
-function Modal(props) {
-    // TODO duplicate CSS
-    const modalBg = {
-        'position': 'fixed',
-        'zIndex' :'200',
-        'width': '100%',
-        'height': '100vh',
-        'top': '50%',
-        'left': '50%',
-        'transform': 'translate(-50%,-50%)',
-        'background': 'rgba(0,0,0,.6)'
-    }
-    const modalStyled = {
-        'position': 'fixed',
-        'width': '200px',
-        'top': '50%',
-        'left': '50%',
-        'transform': 'translate(-50%,-50%)',
-        'background': 'white',
-        'display': 'flex',
-        'flexDirection': 'column',
-        'justifyContent': 'center',
-        'alignItems': 'center'
-    }
-    if (!props.modal) {
-        return null
-    }
-    if (props.modal) {
-        setTimeout(()=>{
-            return (
-                <div style={modalBg}>
-                    <div style={modalStyled}>
-                        <p>틀렸다~</p>
-                        <button type='button' onClick={props.onClick}>
-                            확인
-                        </button>
-                    </div>
-                </div>
-            )
-        }, 20);
-    }
 }
