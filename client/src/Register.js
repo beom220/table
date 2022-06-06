@@ -53,7 +53,7 @@ export default function Register(props) {
         const email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
         if(!name.test(inputs.name)) {
-            alert('name 삐빅')
+            alert('name 삐빅');
             return false;
         }
         if(!nickname.test(inputs.nickname)) {
@@ -103,7 +103,10 @@ export default function Register(props) {
     }
 
     return (
-        <>
+        <div className="login-form">
+            <div className="box-header">
+                Join to Company
+            </div>
             <form action="" onSubmit={onSubmit}>
                 <input type="text" name="name" placeholder='이름을 입력해주세요' onChange={onChange}/>
                 <input type="email" name="email" placeholder='이메일을 입력해주세요' onChange={onChange}/>
@@ -113,11 +116,11 @@ export default function Register(props) {
                 <input type="text" name="nickname" placeholder='닉네임을 입력해주세요' onChange={onChange}/>
                 <input type="email" name="uEmail" placeholder='이메일을 입력해주세요' onChange={onChange}/>
                 <input type="text" name="agreeAt" value={inputs.agreeAt} readOnly/>
-                <button type="submit">가입</button>
-                <button type="button" onClick={() => navigate(-1)}>뒤로가기</button>
+                <button type="submit" className='emphasis'>회원가입</button>
+                <button type="button" className='secondary' onClick={() => navigate(-1)}>뒤로가기</button>
             </form>
             <Modal modal={modal} onClick={controlModal}/>
-        </>
+        </div>
     )
 
 }
@@ -126,6 +129,7 @@ function Modal(props) {
     // TODO duplicate CSS
     const modalBg = {
         'position': 'fixed',
+        'zIndex' :'200',
         'width': '100%',
         'height': '100vh',
         'top': '50%',

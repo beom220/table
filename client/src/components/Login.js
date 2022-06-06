@@ -1,9 +1,18 @@
 import axios from "axios";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {useNavigate, Link} from "react-router-dom";
 
-export default function Login({loginReq, login, loginFailed, loading}) {
+
+export default function Login({loginReq, login, loginFailed, loading, isLogin}) {
     const navigate = useNavigate();
+
+    useEffect(()=> {
+        if(isLogin) {
+            alert('you cannot access');
+            return navigate('/');
+        }
+    }, [])
+
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
@@ -63,15 +72,21 @@ export default function Login({loginReq, login, loginFailed, loading}) {
     if (loading) return (<><p>Loading...</p></>);
 
     return (
-        <>
+        <div className="login-form">
+            <div className="box-header">
+                Sign in to Company
+            </div>
             <form action="" onSubmit={onSubmit}>
                 <input type="email" name="email" placeholder='이메일을 입력해주세요' onChange={onChange}/>
                 <input type="password" name="password" placeholder='비밀번호를 입력해주세요' onChange={onChange}/>
 
-                <button type="submit">로그인</button>
-                <button type="button" onClick={() => navigate(-1)}>뒤로가기</button>
+                <button type="submit" className='primary'>로그인</button>
+                <Link to='/register' className='emphasis'>회원가입</Link>
+                <Link to='/' className='secondary'>뒤로가기</Link>
+
+                {/*<button type="button" className='secondary' onClick={() => navigate(-1)}>뒤로가기</button>*/}
             </form>
-        </>
+        </div>
     )
 
 }

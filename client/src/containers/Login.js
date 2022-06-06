@@ -3,8 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Login from "../components/Login";
 import {loginFailure, loginReqAction, loginSuccess} from "../reducer/member";
 
-export default function LoginContainer() {
-
+export default function LoginContainer(props) {
     const dispatch = useDispatch();
     const loginReq = () => dispatch(loginReqAction());
     const login = (user) => dispatch(loginSuccess(user));
@@ -18,6 +17,7 @@ export default function LoginContainer() {
             login={login}
             loginFailed={loginFailed}
             loading={loginLoading}
+            isLogin={props.isLogin}
         />
     );
 }

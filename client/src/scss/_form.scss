@@ -1,0 +1,67 @@
+@use "color";
+@use "components";
+
+.login-form{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform : translate(-50%, -50%);
+  width: 540px;
+}
+
+form {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  border : {
+    color: color.$border-basic;
+    style: solid;
+    width: 1px;
+  }
+
+  .single{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  input:not([type=radio],[type=checkbox]){
+    display: block;
+    width: 100%;
+    padding: 12px 8px;
+    background-color: color.$input-basic-bg;
+    color: color.$input-basic;
+    border :{
+      radius: 5px;
+      style: solid;
+      width: 1px;
+      color: color.$border-basic;
+    }
+
+    &::placeholder{
+      color: color.$place-holder-basic;
+    }
+
+    &:focus{
+      outline: {
+        style: solid;
+        width: 1px;
+        color : color.$border-focus;
+      }
+    }
+  }
+
+  button, a{
+    text-align: center;
+    border : 1px solid color.$border-default;
+    border-radius: 5px;
+    padding: 8px 8px;
+    cursor: pointer;
+
+    @include components.button;
+  }
+}

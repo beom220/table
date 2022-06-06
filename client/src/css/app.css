@@ -1,0 +1,171 @@
+/**---------------------------------------**/
+@font-face {
+  font-family: "InfinitySans-RegularA1";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+body * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  line-height: 1.125;
+  font-family: "InfinitySans-RegularA1", sans-serif;
+  font-size: inherit;
+  color: #c9d1d9;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #58a6ff;
+}
+
+button {
+  background-color: unset;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #c9d1d9;
+  -webkit-box-shadow: 0 0 0px 1000px #010409 inset;
+  box-shadow: 0 0 0px 1000px #010409 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.login-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px;
+}
+
+form {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  border-color: #30363d;
+  border-style: solid;
+  border-width: 1px;
+}
+form .single {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+form input:not([type=radio], [type=checkbox]) {
+  display: block;
+  width: 100%;
+  padding: 12px 8px;
+  background-color: #010409;
+  color: #c9d1d9;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #30363d;
+}
+form input:not([type=radio], [type=checkbox])::placeholder {
+  color: #8b949e;
+}
+form input:not([type=radio], [type=checkbox]):focus {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #58a6ff;
+}
+form button, form a {
+  text-align: center;
+  border: 1px solid #30363d;
+  border-radius: 5px;
+  padding: 8px 8px;
+  cursor: pointer;
+}
+form button.primary, form a.primary {
+  background-color: #238636;
+  color: #fff;
+}
+form button.primary:hover, form a.primary:hover {
+  background-color: #2ea043;
+}
+form button.secondary, form a.secondary {
+  background-color: #21262d;
+  color: #c9d1d9;
+}
+form button.secondary:hover, form a.secondary:hover {
+  background-color: #30363d;
+}
+form button.emphasis, form a.emphasis {
+  background-color: #1f6feb;
+  color: #fff;
+}
+form button.emphasis:hover, form a.emphasis:hover {
+  background-color: #58a6ff;
+}
+
+body {
+  background-color: #0d1117;
+}
+
+header {
+  padding: 12px 16px;
+  background-color: #161b22;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .utils {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+header .utils a, header .utils button {
+  padding: 6px 16px;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+header .utils a.primary, header .utils button.primary {
+  background-color: #238636;
+  color: #fff;
+}
+header .utils a.primary:hover, header .utils button.primary:hover {
+  background-color: #2ea043;
+}
+header .utils a.secondary, header .utils button.secondary {
+  background-color: #21262d;
+  color: #c9d1d9;
+}
+header .utils a.secondary:hover, header .utils button.secondary:hover {
+  background-color: #30363d;
+}
+
+.box-header {
+  padding: 16px;
+  color: #c9d1d9;
+  background-color: #161b22;
+  border-color: #30363d;
+  border-style: solid;
+  border-width: 1px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 0;
+}
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,25 @@
+@use "color";
+
+@mixin button{
+  &.primary{
+    background-color: color.$button-primary;
+    color: color.$buttons-text-primary;
+    &:hover{
+      background-color: color.$button-primary-hover;
+    }
+  }
+  &.secondary{
+    background-color: color.$button-secondary;
+    color: color.$buttons-text-secondary;
+    &:hover{
+      background-color: color.$button-secondary-hover;
+    }
+  }
+  &.emphasis{
+    background-color: color.$button-emphasis;
+    color: color.$buttons-text-primary;
+    &:hover{
+      background-color: color.$button-emphasis-hover;
+    }
+  }
+}

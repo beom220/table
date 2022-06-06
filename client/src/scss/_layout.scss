@@ -1,0 +1,55 @@
+@use "color";
+
+body {
+  background-color: color.$canvas;
+}
+
+header{
+  padding: 12px 16px;
+  background-color: color.$header-bg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .utils{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    a, button{
+      padding: 6px 16px;
+      border-radius: 5px;
+      font-size: 13px;
+      cursor: pointer;
+
+      &.primary{
+        background-color: color.$button-primary;
+        color: color.$buttons-text-primary;
+        &:hover{
+          background-color: color.$button-primary-hover;
+        }
+      }
+      &.secondary{
+        background-color: color.$button-secondary;
+        color: color.$buttons-text-secondary;
+        &:hover{
+          background-color: color.$button-secondary-hover;
+        }
+      }
+    }
+  }
+}
+
+.box-header{
+  padding: 16px;
+  color: color.$color-basic;
+  background-color: color.$item-header;
+  border : {
+    color: color.$border-basic;
+    style: solid;
+    width: 1px;
+    top-left-radius: 5px;
+    top-right-radius: 5px;
+    bottom: 0;
+  }
+}
