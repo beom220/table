@@ -8,10 +8,41 @@ import {useDispatch, useSelector} from "react-redux";
 import {logoutFailure, logoutReqAction, logoutSuccess} from "./reducer/member";
 import axios from "axios";
 import MyPageContainer from "./containers/Mypage";
-
+import Test from "./create";
 
 export default function App() {
     const {loginSuccess} = useSelector(state => state.member);
+
+    // 세션정보 받음 TODO 세션스토리지 리덕스 연계
+    const setToken = async () => {
+        try {
+            const res = await axios.get('/member');
+            const { success , session } = res.data;
+            if(!success){
+                console.log('no user')
+                console.log('session', session)
+                // return null;
+            }
+            console.log('session');
+            console.log(session);
+            console.log('passport len', !session.passport? session.passport : 'none')
+            console.log('---cookie---');
+            console.log(session.cookie);
+            console.log('passport');
+            console.log(session.passport);
+            if(!session.passport){
+                console.log('nope user')
+            }
+            if(session.passport){
+                console.log('session success~~~')
+                sessionStorage.setItem('key', session.passport.user)
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
     return (
         <div className="app">
@@ -23,12 +54,14 @@ export default function App() {
                     <Utils/>
                 </header>
                 <Routes>
+                    {/*<Route path="/test" element={<Test isLogin={loginSuccess}/>}/>*/}
                     <Route path="/mypage" element={<MyPageContainer isLogin={loginSuccess}/>}/>
                     <Route path="/login" element={<LoginContainer isLogin={loginSuccess}/>}/>
                     <Route path="/register" element={<Register isLogin={loginSuccess}/>}/>
                     <Route path="/" exact element={<Main isLogin={loginSuccess}/>}/>
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
+                <button type='button' onClick={setToken}>setToken</button>
             </BrowserRouter>
         </div>
     )

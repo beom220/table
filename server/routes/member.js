@@ -53,7 +53,7 @@ module.exports = (passport) => {
     //
     router.post('/login', (req, res, next) => {
         passport.authenticate('local', (err, user) => {
-            console.log('session : ',req.session);
+            // console.log('session : ',req.session);
             if (err) {
                 res.send({message: 'error'})
                 return next(err)
@@ -72,12 +72,13 @@ module.exports = (passport) => {
                 return res.send({
                     success: true,
                     message: 'user',
+                    session : req.session,
                     user: {
                         id: user.id,
                         email: user.email,
                         nickname: user.nickname,
                         grade : user.grade,
-                        // session : req.session
+                        session : req.session
                     }
                 })
             })
@@ -87,12 +88,13 @@ module.exports = (passport) => {
     router.get('/', (req, res,next) => {
         if (!req.user) {
             return res.send({
-                success: false,
+                success: false
             })
         }
         passport.authenticate('local', (err, user) => {
             return res.send({
                 success: true,
+                session : req.session,
                 user: {
                     email: user.email,
                     nickname: user.nickname,

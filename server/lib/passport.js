@@ -47,7 +47,7 @@ module.exports = (app) => {
                     // 비밀번호 비교, 일치 = true, 불일치 = false
                     const exact = bcrypt.compareSync(password, row[0].password);
                     if (!exact) return done(null, false, {message: 'error pw'});
-                    return done(null, row[0]);
+                    done(null, row[0]);
                 })
             })
         }
