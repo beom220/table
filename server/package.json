@@ -4,7 +4,10 @@
   "description": "",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start App.js --watch --ignore-watch=\"data/* sessions/*\"  --no-daemon",
+    "stop" : "pm2 stop App.js --watch",
+    "kill" : "pm2 kill"
   },
   "keywords": [],
   "author": "",
