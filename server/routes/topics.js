@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require("../lib/db");
+const path = require("path");
 
 router.post('/free/create', (req, res) => {
     const post = req.body;
-    const { memberId, title, description, useComment, disabled } = post;
+    const {memberId, title, description, useComment, disabled} = post;
 
     if (!memberId || !title || !description || !useComment || !disabled) {
         return res.send({
@@ -19,18 +20,64 @@ router.post('/free/create', (req, res) => {
         (error, result) => {
             if (error) {
                 res.send({
-                    success : false,
-                    message : 'sql error'
+                    success: false,
+                    message: 'sql error'
                 })
                 throw error;
             }
             res.send({
-                success : true,
-                topicId : result.insertId
+                success: true,
+                topicId: result.insertId
             })
         }
     )
 })
 
+//
+router.get('/free/:free_id', (req, res, next) => {
+    const freeId = path.parse(req.params.free_id).base;
+
+    const sqlQuery = `SELECT free.id, title, description, member.name
+                      FROM free
+                               LEFT JOIN member ON free.memberId = member.id
+                      WHERE free.id = ?`;
+
+    db.query(sqlQuery, [freeId], (error, rows) => {
+            if (error) {
+                res.send({
+                    success : false,
+                    message : 'sql Error'
+                })
+                return next(error);
+            }
+            res.send({
+                success : true,
+                message : rows[0]
+            })
+            // res.send(html);
+        }
+    )
+});
+
+router.get('/free', (req, res, next) => {
+    const sqlQuery = `SELECT free.id, title, description, nickname
+                      FROM free LEFT JOIN member ON free.memberId = member.id`;
+
+    db.query(sqlQuery, (error, rows) => {
+            if (error) {
+                res.send({
+                    success : false,
+                    message : 'sql Error'
+                })
+                return next(error);
+            }
+            res.send({
+                success : true,
+                message : rows
+            })
+            // res.send(html);
+        }
+    )
+});
 
 module.exports = router;

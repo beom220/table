@@ -53,3 +53,9 @@ header{
     bottom: 0;
   }
 }
+
+.contents{
+  width: 640px;
+  margin: 60px auto;
+  border-color: color.$item-header;
+}

@@ -1,4 +1,5 @@
-import {BrowserRouter, Routes, Route, Link, useNavigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Link, useNavigate, useParams} from 'react-router-dom';
+import {NavLink} from "react-router-dom";
 import Main from "./Main";
 import NotFound from "./NotFound";
 import Register from "./Register";
@@ -9,39 +10,43 @@ import {logoutFailure, logoutReqAction, logoutSuccess} from "./reducer/member";
 import axios from "axios";
 import MyPageContainer from "./containers/Mypage";
 import Test from "./create";
+import Free from "./Free";
+import {useEffect, useState} from "react";
+import FreeView from "./FreeView";
 
 export default function App() {
     const {loginSuccess} = useSelector(state => state.member);
 
     // 세션정보 받음 TODO 세션스토리지 리덕스 연계
-    const setToken = async () => {
-        try {
-            const res = await axios.get('/member');
-            const { success , session } = res.data;
-            if(!success){
-                console.log('no user')
-                console.log('session', session)
-                // return null;
-            }
-            console.log('session');
-            console.log(session);
-            console.log('passport len', !session.passport? session.passport : 'none')
-            console.log('---cookie---');
-            console.log(session.cookie);
-            console.log('passport');
-            console.log(session.passport);
-            if(!session.passport){
-                console.log('nope user')
-            }
-            if(session.passport){
-                console.log('session success~~~')
-                sessionStorage.setItem('key', session.passport.user)
-            }
-
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    //
+    // const setToken = async () => {
+    //     try {
+    //         const res = await axios.get('/member');
+    //         const { success , session } = res.data;
+    //         if(!success){
+    //             console.log('no user')
+    //             console.log('session', session)
+    //             // return null;
+    //         }
+    //         console.log('session');
+    //         console.log(session);
+    //         console.log('passport len', !session.passport? session.passport : 'none')
+    //         console.log('---cookie---');
+    //         console.log(session.cookie);
+    //         console.log('passport');
+    //         console.log(session.passport);
+    //         if(!session.passport){
+    //             console.log('nope user')
+    //         }
+    //         if(session.passport){
+    //             console.log('session success~~~')
+    //             sessionStorage.setItem('key', session.passport.user)
+    //         }
+    //
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
 
     return (
@@ -53,21 +58,41 @@ export default function App() {
                     </div>
                     <Utils/>
                 </header>
-                <Routes>
-                    {/*<Route path="/test" element={<Test isLogin={loginSuccess}/>}/>*/}
-                    <Route path="/mypage" element={<MyPageContainer isLogin={loginSuccess}/>}/>
-                    <Route path="/login" element={<LoginContainer isLogin={loginSuccess}/>}/>
-                    <Route path="/register" element={<Register isLogin={loginSuccess}/>}/>
-                    <Route path="/" exact element={<Main isLogin={loginSuccess}/>}/>
-                    <Route path="*" element={<NotFound/>}/>
-                </Routes>
-                <button type='button' onClick={setToken}>setToken</button>
+                <Navigation/>
+                <div className="contents">
+
+                    <Routes>
+                        {/*<Route path="/test" element={<Test isLogin={loginSuccess}/>}/>*/}
+                        <Route path="/free/:name" element={<FreeView/>}/>
+                        <Route path="/free" element={<Free/>}/>
+                        <Route path="/mypage" element={<MyPageContainer isLogin={loginSuccess}/>}/>
+                        <Route path="/login" element={<LoginContainer isLogin={loginSuccess}/>}/>
+                        <Route path="/register" element={<Register isLogin={loginSuccess}/>}/>
+                        <Route path="/" exact element={<Main isLogin={loginSuccess}/>}/>
+                        <Route path="*" element={<NotFound/>}/>
+                    </Routes>
+                </div>
+                {/*<button type='button' onClick={setToken}>setToken</button>*/}
+                {/*<button type='button' onClick={getFreeBoard}>getBoard</button>*/}
             </BrowserRouter>
         </div>
     )
 }
 
-function Utils(){
+function Navigation(){
+    return (
+        <div className="navigation">
+            <NavLink to="/">Home</NavLink>
+            <NavLink
+                to="/free"
+                // className={({ isActive }) => (isActive ? 'primary' : 'secondary')}
+            >Free
+            </NavLink>
+        </div>
+    )
+}
+
+function Utils() {
     const navigate = useNavigate();
     const {loginSuccess} = useSelector(state => state.member);
     const dispatch = useDispatch();
@@ -80,7 +105,7 @@ function Utils(){
         logoutReq();
         try {
             const res = await axios.get('/member/logout');
-            const { success } = res.data;
+            const {success} = res.data;
 
             if (!success) {
                 console.log('Err ', success)
@@ -94,7 +119,7 @@ function Utils(){
             console.error(err.message);
         }
     }
-    if(!loginSuccess){
+    if (!loginSuccess) {
         return (
             <div className="utils">
                 <Link to='/login' className='primary'>Login</Link>

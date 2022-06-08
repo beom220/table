@@ -46,6 +46,85 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.navigation a {
+  font-size: 14px;
+  padding: 20px 24px 8px;
+  text-align: center;
+  color: #8b949e;
+  position: relative;
+  transition: color ease 0.4s;
+}
+.navigation a::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  left: 0;
+  top: 100%;
+  opacity: 0;
+  transition: opacity ease-in-out 0.4s;
+}
+.navigation a:hover {
+  color: #c9d1d9;
+}
+.navigation a:hover::after {
+  background-color: #8b949e;
+  opacity: 1;
+}
+.navigation a.active {
+  color: #c9d1d9;
+}
+.navigation a.active::after {
+  opacity: 1;
+  background-color: #58a6ff;
+}
+
+.board .title {
+  font-size: 24px;
+}
+.board .lists {
+  margin-top: 24px;
+  overflow: hidden;
+  border-color: #30363d;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 6px;
+}
+.board .lists .list-title {
+  background-color: #161b22;
+  padding: 16px 24px;
+  color: inherit;
+}
+.board .lists .list-info {
+  border-top: 1px solid #30363d;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.board .lists .list-info .desc {
+  font-size: 14px;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-height: 1.625;
+  max-height: 68.25px;
+}
+.board .lists .list-info .author, .board .lists .list-info .create {
+  font-size: 13px;
+  text-align: right;
+}
+
 .login-form {
   position: fixed;
   top: 50%;
@@ -166,6 +245,12 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom: 0;
+}
+
+.contents {
+  width: 640px;
+  margin: 60px auto;
+  border-color: #161b22;
 }
 
 /*# sourceMappingURL=app.css.map */
