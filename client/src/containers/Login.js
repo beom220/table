@@ -9,8 +9,6 @@ export default function LoginContainer(props) {
     const login = (user) => dispatch(loginSuccess(user));
     const loginFailed = () => dispatch(loginFailure());
     const {loginLoading} = useSelector(state => state.member);
-    // const onLogin = user => dispatch(login(user));
-    // console.log(loginFailed())
     return (
         <Login
             loginReq={loginReq}

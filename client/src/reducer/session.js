@@ -1,44 +1,58 @@
 import axios from "axios";
 
-const setToken = async () => {
+export const setToken = async () => {
     try {
         const res = await axios.get('/member')
         const {success, session} = res.data;
         if (!success) {
-            console.log('no user');
-            console.log('session', session);
-            return null;
+            // console.log('no user');
+            // console.log('session', session);
+            return false;
         }
-        return sessionStorage.setItem('passport', session.passport);
+        sessionStorage.setItem('passport', JSON.stringify(session.passport.user));
     } catch (err) {
         console.error(err);
     }
 }
 
-const getToken = () => {
-    if (!sessionStorage.length) {
-        return null
-    }
-    sessionStorage.getItem('passport')
+export const getToken = () => {
+    // if (!sessionStorage.length) {
+    //     return null
+    // }
+    return sessionStorage.getItem('passport');
 }
 
-const restoreToken = () => ({
+export const clearToken = () => {
+    if (!sessionStorage.length) {
+        return null;
+    }
+    sessionStorage.removeItem('passport');
+    return null;
+}
+
+
+export const restoreToken = () => ({
     type: 'RESTORE_TOKEN',
     userToken : getToken()
 })
 
-const signIn = () => ({
+export const signIn = () => ({
     type : 'SIGN_IN',
     userToken : getToken()
 })
 
+export const signOut = () => ({
+    type : 'SIGN_OUT',
+    userToken : clearToken()
+})
+
 const initialState = {
     isLoading: true,
-    isSignOut: false,
+    isSignOut: true,
     userToken: null,
 }
 
-export default function authentication(state, action) {
+export default function authentication(state = initialState, action) {
     switch (action.type) {
         case 'RESTORE_TOKEN' :
             return {

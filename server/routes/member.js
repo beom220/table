@@ -92,6 +92,7 @@ module.exports = (passport) => {
             })
         }
         passport.authenticate('local', (err, user) => {
+            console.log(req.session)
             return res.send({
                 success: true,
                 session : req.session,
@@ -105,45 +106,6 @@ module.exports = (passport) => {
     })
     return router;
 }
-
-
-// const post = req.body;
-// const { email, password } = post;
-//
-// if( !email || !password ){
-//     return res.send({
-//         success : false,
-//         message : 'null'
-//     })
-// }
-// db.query(`SELECT email FROM member`, (err, rows) => {
-//     const user = rows.filter(v => email === v.email);
-//     if(!user.length){
-//         return res.send({
-//             success : false,
-//             message : 'wrong email'
-//         })
-//     }
-//     db.query(`SELECT email, password, nickname FROM member WHERE email=?`,[email], (err, result) => {
-//         const exact = bcrypt.compareSync(password, result[0].password);
-//         if(!exact){
-//             return res.send({
-//                 success : false,
-//                 message : 'wrong password'
-//             })
-//         }
-//         return req.login(result[0], (err)=>{
-//             res.send({
-//                 success : true,
-//                 message : 'welcome',
-//                 user : {
-//                     nickname: result[0].nickname,
-//                     email : result[0].email
-//                 }
-//             })
-//         });
-//     })
-// })
 
 
 

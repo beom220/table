@@ -7,15 +7,8 @@ const topics = require("./topics");
 // router.use("/member", member);
 router.use("/topics", topics);
 router.use("/register", register);
-router.get("/", (req, res) => {
-    let user_info = null;
-    if(!req.user){
-        user_info = [];
-    }
-    if(req.user){
-        user_info = req.user;
-    }
-    res.send(user_info);
+router.get("*", (req, res) => {
+    res.send(req.user);
 })
 
 module.exports = router;

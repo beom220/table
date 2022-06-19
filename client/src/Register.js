@@ -23,12 +23,14 @@ export default function Register(props) {
         name: '',
         email: '',
         password: '',
+        passwordchk: '',
         birth: '',
         phone: '',
         nickname: '',
         uEmail: '',
         agreeAt: today(),
     });
+    const [error, setError] = useState(false)
     // const {name, email, password, birth, phone, nickname, uEmail, agreeAt} = inputs;
 
     const onChange = (e) => {
@@ -43,40 +45,54 @@ export default function Register(props) {
         const name = /^[가-힣]{2,20}$/; /* 한글만 */
         const nickname = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{4,12}$/; /* 4 ~ 12 자 한글포함 */
         const password = /^[a-zA-Z0-9`~!@#$%^&*()\-_=+]{8,20}$/; /* 8 ~ 20 자 특수문자,숫자,영어허용*/
+        const passwordchk = /^[a-zA-Z0-9`~!@#$%^&*()\-_=+]{8,20}$/;
         const birth = /^[12]\d{7}$/; /* 숫자만 8자 */
         const phone = /^(01)[01679]\d{3,4}\d{4}$/; /* 숫자만 */
         const email = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-        if(!name.test(inputs.name)) {
-            alert('name 삐빅');
-            return false;
-        }
-        if(!nickname.test(inputs.nickname)) {
-            alert('nickname 삐빅');
-            return false;
-        }
+
+        console.log(inputs.password)
+        console.log(inputs.passwordchk)
+        console.log(inputs.password === inputs.passwordchk)
+        // if(!name.test(inputs.name)) {
+        //     alert('name 삐빅');
+        //     return false;
+        // }
+        // if(!nickname.test(inputs.nickname)) {
+        //     alert('nickname 삐빅');
+        //     return false;
+        // }
         if(!password.test(inputs.password)) {
             alert('pwd 삐빅');
             return false;
         }
-        if(!birth.test(inputs.birth)) {
-            alert('birth 삐빅');
+        if(!passwordchk.test(inputs.passwordchk)){
+            alert('pchk 삐빅');
             return false;
         }
-        if(!phone.test(inputs.phone)) {
-            alert('phone 삐빅');
-            return false;
+        if(inputs.password !== inputs.passwordchk){
+            alert('비밀번호 다름');
+            setError(true);
         }
-        if(!email.test(inputs.email)) {
-            alert('email 삐빅');
-            return false;
-        }
-        if(!email.test(inputs.uEmail)) {
-            alert('uEmail 삐빅');
-            return false;
-        }
+        // if(!birth.test(inputs.birth)) {
+        //     alert('birth 삐빅');
+        //     return false;
+        // }
+        // if(!phone.test(inputs.phone)) {
+        //     alert('phone 삐빅');
+        //     return false;
+        // }
+        // if(!email.test(inputs.email)) {
+        //     alert('email 삐빅');
+        //     return false;
+        // }
+        // if(!email.test(inputs.uEmail)) {
+        //     alert('uEmail 삐빅');
+        //     return false;
+        // }
         console.log('all pass');
-        return true;
+        // return true;
+        return false;
     }
 
     // TODO 생성한 정보로 로그인하기
@@ -108,6 +124,7 @@ export default function Register(props) {
                 <input type="text" name="name" placeholder='이름을 입력해주세요' onChange={onChange}/>
                 <input type="email" name="email" placeholder='이메일을 입력해주세요' onChange={onChange}/>
                 <input type="password" name="password" placeholder='비밀번호를 입력해주세요' onChange={onChange}/>
+                <input type="password" name="passwordchk" placeholder='비밀번호 확인' onChange={onChange}/>
                 <input type="text" name="birth" placeholder='생년월일을 입력해주세요' onChange={onChange}/>
                 <input type="tel" name="phone" placeholder='휴대폰번호를 입력해주세요' onChange={onChange}/>
                 <input type="text" name="nickname" placeholder='닉네임을 입력해주세요' onChange={onChange}/>
