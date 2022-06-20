@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import NotFound from "./NotFound";
@@ -60,8 +60,10 @@ export default function FreeView(){
     }
 
     if(data){
+        const link = `/free/update/${param}`;
         return (
             <>
+                <Link to={link} >수정</Link>
                 <h1>Hello</h1>
                 <h2>match URL : {param}</h2>
                 <div>

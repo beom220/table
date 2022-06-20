@@ -169,6 +169,72 @@ form input:not([type=radio], [type=checkbox]):focus {
   outline-width: 1px;
   outline-color: #58a6ff;
 }
+form textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 8px;
+  background-color: #010409;
+  color: #c9d1d9;
+  min-height: 300px;
+  white-space: pre-wrap;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #30363d;
+}
+form textarea::placeholder {
+  color: #8b949e;
+}
+form textarea:focus {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #58a6ff;
+}
+form label.check-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 28px;
+}
+form label.check-box input {
+  width: 0;
+  height: 18px;
+}
+form label.check-box input::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #010409;
+}
+form label.check-box input:checked::before {
+  background-color: #2ea043;
+  color: #c9d1d9;
+  text-align: center;
+  vertical-align: bottom;
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  content: "check";
+  font-size: 16px;
+}
+form label.check-box input:focus::before {
+  border-color: #58a6ff;
+}
 form button, form a {
   text-align: center;
   border: 1px solid #30363d;

@@ -55,6 +55,70 @@ form {
     }
   }
 
+  textarea{
+    display: block;
+    width: 100%;
+    padding: 12px 8px;
+    background-color: color.$input-basic-bg;
+    color: color.$input-basic;
+    min-height: 300px;
+    white-space: pre-wrap;
+    border : {
+      radius: 5px;
+      style: solid;
+      width: 1px;
+      color: color.$border-basic;
+    }
+
+    &::placeholder{
+      color: color.$place-holder-basic;
+    }
+
+    &:focus{
+      outline: {
+        style: solid;
+        width: 1px;
+        color : color.$border-focus;
+      }
+    }
+  }
+
+  label.check-box{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 28px;
+    input{
+      width: 0;
+      height: 18px;
+      &::before{
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        background-color: color.$input-basic-bg;
+      }
+      &:checked::before{
+        background-color: color.$button-primary-hover;
+        color: color.$color-basic;
+        text-align: center;
+        vertical-align: bottom;
+        @include components.icon{
+          content: 'check';
+          font-size: 16px;
+        }
+      }
+      &:focus::before{
+        border-color : color.$border-focus;
+      }
+    }
+  }
+
   button, a{
     text-align: center;
     border : 1px solid color.$border-default;

@@ -1,49 +1,34 @@
-import {BrowserRouter, Routes, Route, Link, useNavigate, useParams} from 'react-router-dom';
+import {BrowserRouter,  Link, useNavigate} from 'react-router-dom';
 import {NavLink} from "react-router-dom";
-import Main from "./Main";
-import NotFound from "./NotFound";
-import Register from "./Register";
-// import Login from "./Login";
-import LoginContainer from "./containers/Login";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutFailure, logoutReqAction, logoutSuccess} from "./reducer/member";
 import axios from "axios";
-import MyPageContainer from "./containers/Mypage";
-import Test from "./create";
-import Free from "./Free";
-import FreeView from "./FreeView";
+import Routers from "./routes";
+import logo from './logo.webp';
 
 export default function App() {
-    //
-
-    const {loginSuccess} = useSelector(state => state.member);
+    // const {loginSuccess} = useSelector(state => state.member);
+    const logoStyle = {
+        height : '30px',
+        width : 'auto',
+        transform: 'rotate(325deg)'
+    }
 
     return (
         <div className="app">
             <BrowserRouter>
                 <header>
                     <div className="logo">
-                        <Link to='/'>logo</Link>
+                        <Link to='/'>
+                            <img src={logo} alt="logo" style={logoStyle}/>
+                        </Link>
                     </div>
-                    {/*<div onClick={isUser}>ii</div>*/}
                     <Utils/>
                 </header>
                 <Navigation/>
                 <div className="contents">
-
-                    <Routes>
-                        {/*<Route path="/test" element={<Test isLogin={loginSuccess}/>}/>*/}
-                        <Route path="/free/:name" element={<FreeView/>}/>
-                        <Route path="/free" element={<Free/>}/>
-                        <Route path="/mypage" element={<MyPageContainer isLogin={loginSuccess}/>}/>
-                        <Route path="/login" element={<LoginContainer isLogin={loginSuccess}/>}/>
-                        <Route path="/register" element={<Register isLogin={loginSuccess}/>}/>
-                        <Route path="/" exact element={<Main isLogin={loginSuccess}/>}/>
-                        <Route path="*" element={<NotFound/>}/>
-                    </Routes>
+                    <Routers/>
                 </div>
-                {/*<button type='button' onClick={setUser}>setToken</button>*/}
-                {/*<button type='button' onClick={getFreeBoard}>getBoard</button>*/}
             </BrowserRouter>
         </div>
     )
@@ -53,11 +38,7 @@ function Navigation(){
     return (
         <div className="navigation">
             <NavLink to="/">Home</NavLink>
-            <NavLink
-                to="/free"
-                // className={({ isActive }) => (isActive ? 'primary' : 'secondary')}
-            >Free
-            </NavLink>
+            <NavLink to="/free">Free</NavLink>
         </div>
     )
 }
@@ -79,7 +60,7 @@ function Utils() {
 
             if (!success) {
                 console.log('Err ', success)
-                // return logoutFailed();
+                return logoutFailed();
             }
             console.log('Success ', success);
             logout();

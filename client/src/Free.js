@@ -4,13 +4,9 @@ import axios from "axios";
 import NotFound from "./NotFound";
 
 export default function Free(){
-    const params = useParams();
-    const param = params.name? params.name : false;
-
     const [ data, setData ] = useState({});
     const [ dataCount, setDataCount] = useState('');
 
-    // TODO boardTable 생성
     const getFreeBoard = async () => {
         try {
             const res = await axios.get('/topics/free');
@@ -21,7 +17,6 @@ export default function Free(){
             }
             setData(message);
             setDataCount(message.length);
-            return console.log(res.data);
         } catch (err){
             console.error(err);
         }
@@ -29,13 +24,17 @@ export default function Free(){
 
     useEffect(() => {
         getFreeBoard();
-    },[])
+        console.log('dataCount : ',dataCount)
+    },[dataCount])
 
-    if(data.length){
+
+    if(!!dataCount){
         return (
             <div className="board">
                 <h1 className="title">Free Board</h1>
-                {data.map((v, i) => (
+                <Link to="/free/create">Create</Link>
+                {/* 최근글이 상위로*/}
+                {data.reverse().map((v, i) => (
                     <Topic data={v} key={i}/>
                 ))}
             </div>
