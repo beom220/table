@@ -14,7 +14,7 @@ export default function FreeView(){
     const getFreeBoard = async () => {
         if(!param) {
             try {
-                const res = await axios.get('/topics/free');
+                const res = await axios.get('api/topics/free');
                 const {success, message} = res.data;
 
                 if (!success) {
@@ -29,7 +29,7 @@ export default function FreeView(){
             // return console.log('no id')
         }
         try {
-            const res = await axios.get('/topics/free/' + param);
+            const res = await axios.get('/api/topics/free/' + param);
             const {success, message} = res.data;
 
             if (!success) {

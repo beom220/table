@@ -53,7 +53,7 @@ export default function Login({loginReq, login, loginFailed, loading, isLogin}) 
         if (!formCheck()) return loginFailed();
 
         try {
-            const res = await axios.post('/member/login', inputs)
+            const res = await axios.post('/api/member/login', inputs)
             const {success} = res.data;
 
             if (!success) {

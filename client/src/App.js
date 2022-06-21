@@ -55,7 +55,7 @@ function Utils() {
         e.preventDefault();
         logoutReq();
         try {
-            const res = await axios.get('/member/logout');
+            const res = await axios.get('/api/member/logout');
             const {success} = res.data;
 
             if (!success) {

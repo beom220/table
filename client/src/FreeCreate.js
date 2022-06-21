@@ -40,7 +40,7 @@ export default function FreeCreate(){
         e.preventDefault();
 
         try {
-            const res = await axios.post('/topics/free/create', inputs);
+            const res = await axios.post('/api/topics/free/create', inputs);
             const {success, message, topicId} = res.data;
 
             if(!success){

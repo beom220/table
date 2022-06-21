@@ -57,7 +57,7 @@ export default function MyPage({isLogin, user}) {
         if (!formCheck()) return logoutFailed();
 
         try {
-            const res = await axios.post('/member/update', inputs)
+            const res = await axios.post('/api/member/update', inputs)
             const {success} = res.data;
 
             if (!success) {

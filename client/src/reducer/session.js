@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const setToken = async () => {
     try {
-        const res = await axios.get('/member')
+        const res = await axios.get('/api/member')
         const {success, session} = res.data;
         if (!success) {
             // console.log('no user');

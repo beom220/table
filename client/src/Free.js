@@ -9,7 +9,7 @@ export default function Free(){
 
     const getFreeBoard = async () => {
         try {
-            const res = await axios.get('/topics/free');
+            const res = await axios.get('api/topics/free');
             const {success, message} = res.data;
 
             if (!success) {
@@ -34,7 +34,7 @@ export default function Free(){
                 <h1 className="title">Free Board</h1>
                 <Link to="/free/create">Create</Link>
                 {/* 최근글이 상위로*/}
-                {data.reverse().map((v, i) => (
+                {data.slice(0).reverse().map((v, i) => (
                     <Topic data={v} key={i}/>
                 ))}
             </div>
