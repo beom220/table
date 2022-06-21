@@ -30,8 +30,17 @@ app.use(session({
 const passport = require('./lib/passport')(app);
 const memberRoute = require('./routes/member')(passport);
 
-app.use('/member', memberRoute);
-app.use('/', routes);
+
+
+
+app.use('/api/member', memberRoute);
+app.use('/api', routes);
+
+const root = require("path").join(__dirname, "../client/build");
+app.use(express.static(root));
+app.get('*', (req, res) => {
+    res.sendFile("index.html", { root });
+})
 
 // not found page
 app.use((req, res) => {
@@ -48,4 +57,3 @@ app.listen(port, () => {
     console.log('server listening to ', port)
 });
 
-app.use(express.static(path.join(__dirname, "../client/build")));
