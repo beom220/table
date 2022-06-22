@@ -88,18 +88,20 @@ module.exports = (passport) => {
     router.get('/', (req, res,next) => {
         if (!req.user) {
             return res.send({
-                success: false
+                success: false,
+                user : null
             })
         }
         passport.authenticate('local', (err, user) => {
             console.log(req.session)
             return res.send({
                 success: true,
-                session : req.session,
-                user: {
-                    email: user.email,
-                    nickname: user.nickname,
-                }
+                user : req.user
+                // session : req.session,
+                // user: {
+                //     email: user.email,
+                //     nickname: user.nickname,
+                // }
             })
         })(req, res, next);
 

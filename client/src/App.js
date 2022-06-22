@@ -5,9 +5,32 @@ import {logoutFailure, logoutReqAction, logoutSuccess} from "./reducer/member";
 import axios from "axios";
 import Routers from "./routes";
 import logo from './logo.webp';
+import {useEffect, useState} from "react";
 
 export default function App() {
-    // const {loginSuccess} = useSelector(state => state.member);
+    // 아래 정보 스토리지에 저장 & 리덕스로,
+    const [user, setUser] = useState({});
+    const getUser = async () => {
+        try {
+            const res = await axios.get('/api/member');
+            const {success, user} = res.data;
+
+            if (!success) {
+                console.log('에러뜸')
+            }
+            console.log(res.data)
+            setUser(user)
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    useEffect(()=>{
+        getUser();
+    },[])
+    const controlSetUser = () => {
+        setUser('');
+    }
+
     const logoStyle = {
         height : '30px',
         width : 'auto',
@@ -23,7 +46,7 @@ export default function App() {
                             <img src={logo} alt="logo" style={logoStyle}/>
                         </Link>
                     </div>
-                    <Utils/>
+                    <Utils user={user} clearUser={() => controlSetUser()}/>
                 </header>
                 <Navigation/>
                 <div className="contents">
@@ -43,9 +66,11 @@ function Navigation(){
     )
 }
 
-function Utils() {
+function Utils({user, clearUser}) {
+    const userOut = () => clearUser();
+
     const navigate = useNavigate();
-    const {loginSuccess} = useSelector(state => state.member);
+    // const {loginSuccess} = useSelector(state => state.member);
     const dispatch = useDispatch();
     const logoutReq = () => dispatch(logoutReqAction());
     const logout = () => dispatch(logoutSuccess());
@@ -63,6 +88,7 @@ function Utils() {
                 return logoutFailed();
             }
             console.log('Success ', success);
+            userOut();
             logout();
             return navigate('/');
         } catch (err) {
@@ -70,7 +96,7 @@ function Utils() {
             console.error(err.message);
         }
     }
-    if (!loginSuccess) {
+    if (!user) {
         return (
             <div className="utils">
                 <Link to='/login' className='primary'>Login</Link>

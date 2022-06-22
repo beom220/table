@@ -19,7 +19,7 @@ module.exports = (app) => {
     //  페이지방문시 세션Store정보를 조회
     passport.deserializeUser((id, done) => {
         console.log('deserializeUser : ', id);
-        db.query(`SELECT email
+        db.query(`SELECT id, email
                   FROM member
                   WHERE email = ?`, [id], (err, user) => {
             if (err) return done(null, false, {message: 'Sql Error'});
