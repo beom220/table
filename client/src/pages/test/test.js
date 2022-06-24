@@ -7,7 +7,7 @@ export default function Test(){
     const [ count, setCount ] = useRecoilState(counter);
     const resetCount = useResetRecoilState(counter);
     const countLabel = useRecoilValue(countLabelState);
-    const [ number, setNumber] = useState(0);
+    const [ number, setNumber] = useState(1);
     const increment = () => setCount(count + number);
     const decrement = () => setCount(count - number);
     const onChange = (e) => setNumber(Number(e.target.value));
@@ -22,7 +22,7 @@ export default function Test(){
             <br/><br/>
             <button onClick={onReset}>reset</button>
             <br/><br/>
-            <input type="number" placeholder="number" onChange={onChange}/>
+            <input type="number" placeholder="number" value={number} onChange={onChange}/>
             <button onClick={increment}>count up</button>
             <button onClick={decrement}>count down</button>
         </>
