@@ -1,22 +1,17 @@
 import { BrowserRouter, Link, NavLink } from "react-router-dom";
 import Routers from "./routes";
+import {RecoilRoot} from "recoil";
+import Test from "./pages/test/test";
+import {TempCelcius} from "./recoil/counter/example";
 
 export default function App(){
-
     return (
-        <div className="app">
-            <BrowserRouter>
-                <Routers/>
-            </BrowserRouter>
-        </div>
+        <RecoilRoot>
+            <Test/>
+            <TempCelcius/>
+        </RecoilRoot>
     )
 }
-
-function Navigation(){
-    return (
-        <div className="navigation">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/free">Free</NavLink>
-        </div>
-    )
-}
+// <BrowserRouter>
+//     <Routers/>
+// </BrowserRouter>
