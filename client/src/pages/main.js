@@ -1,4 +1,4 @@
-import img from './pngegg.png';
+import img from '../assets/images/pngegg.png'
 export default function Main(props) {
     return (
         <div className="login-form">

@@ -5,11 +5,11 @@ import {setToken, signIn} from "../reducer/session";
 import {useDispatch} from "react-redux";
 
 
-export default function Login({loginReq, login, loginFailed, loading, isLogin}) {
+export default function Login({signIn, isSignOut, isLoading}) {
     const navigate = useNavigate();
-
+    const logIn = () => signIn;
     useEffect(()=> {
-        if(isLogin) {
+        if(!isSignOut) {
             alert('you cannot access');
             return navigate('/');
         }
@@ -49,29 +49,31 @@ export default function Login({loginReq, login, loginFailed, loading, isLogin}) 
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        loginReq();
-        if (!formCheck()) return loginFailed();
+        // loginReq();
+        // if (!formCheck()) return loginFailed();
+        if (!formCheck()) return false;
 
         try {
             const res = await axios.post('/api/member/login', inputs)
             const {success} = res.data;
 
             if (!success) {
-                loginFailed();
+                // loginFailed();
                 return alert('wrong info')
             }
 
             const {user} = res.data;
             console.log(user);
-            login(user);
-            return navigate('/');
+            logIn();
+            // login(user);
+            navigate('/');
         } catch (err) {
-            console.error(err.message);
-            return loginFailed();
+            return console.error(err.message);
+            // return loginFailed();
         }
     }
 
-    if (loading) return (<><p>Loading...</p></>);
+    if (isLoading) return (<><p>Loading...</p></>);
 
     return (
         <div className="login-form">

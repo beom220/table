@@ -3,13 +3,14 @@ import axios from "axios";
 export const setToken = async () => {
     try {
         const res = await axios.get('/api/member')
-        const {success, session} = res.data;
+        const {success, user} = res.data;
         if (!success) {
-            // console.log('no user');
-            // console.log('session', session);
+            console.log('no user');
+            console.log('user', user);
             return false;
         }
-        sessionStorage.setItem('passport', JSON.stringify(session.passport.user));
+        sessionStorage.setItem('user', JSON.stringify(user).replace(/\"/gi, ""));
+        // sessionStorage.setItem('user', user);
     } catch (err) {
         console.error(err);
     }
@@ -19,18 +20,19 @@ export const getToken = () => {
     // if (!sessionStorage.length) {
     //     return null
     // }
-    return sessionStorage.getItem('passport');
+    return sessionStorage.getItem('user');
 }
 
 export const clearToken = () => {
     if (!sessionStorage.length) {
         return null;
     }
-    sessionStorage.removeItem('passport');
+    sessionStorage.removeItem('user');
     return null;
 }
 
 
+// action func
 export const restoreToken = () => ({
     type: 'RESTORE_TOKEN',
     userToken : getToken()
@@ -46,10 +48,12 @@ export const signOut = () => ({
     userToken : clearToken()
 })
 
+
+//
 const initialState = {
-    isLoading: true,
+    isLoading: false,
     isSignOut: true,
-    userToken: null,
+    userToken: getToken(),
 }
 
 export default function authentication(state = initialState, action) {
@@ -58,7 +62,7 @@ export default function authentication(state = initialState, action) {
             return {
                 ...state,
                 userToken: action.token,
-                isLoading: false,
+                isLoading: true,
             }
 
         case 'SIGN_IN' :
