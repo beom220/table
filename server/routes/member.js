@@ -72,14 +72,15 @@ module.exports = (passport) => {
                 return res.send({
                     success: true,
                     message: 'user',
-                    session : req.session,
-                    user: {
-                        id: user.id,
-                        email: user.email,
-                        nickname: user.nickname,
-                        grade : user.grade,
-                        session : req.session
-                    }
+                    user : req.user
+                    // session : req.session,
+                    // user: {
+                    //     id: user.id,
+                    //     email: user.email,
+                    //     nickname: user.nickname,
+                    //     grade : user.grade,
+                    //     session : req.session
+                    // }
                 })
             })
         })(req, res, next);

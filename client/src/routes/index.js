@@ -7,8 +7,6 @@ export default function Routers(){
     return (
         <BrowserRouter>
             <Routes>
-                {/*<Route path="/free/*" element={<FreeRoutes/>}/>*/}
-                {/*<Route path="/mypage" element={<MyPageContainer/>}/>*/}
                 <Route path="/login" element={<Login/>}/>
                 {/*<Route path="/register" element={<Register/>}/>*/}
                 <Route path="/" exact element={<Main/>}/>
