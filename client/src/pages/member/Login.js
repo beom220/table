@@ -1,10 +1,11 @@
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-
+import { userState} from "../../recoil/member/authorize";
+import {useRecoilState} from "recoil";
 
 export default function Login() {
+    const [logger, setLogger ] = useRecoilState(userState);
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: '',
@@ -40,21 +41,16 @@ export default function Login() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        // loginReq();
-        // if (!formCheck()) return loginFailed();
         if (!formCheck()) return false;
         try {
             const res = await axios.post('/api/member/login', inputs)
             const {success} = res.data;
 
             if (!success) {
-                // loginFailed();
                 return alert('wrong info')
             }
-
             const {user} = res.data;
-            console.log(user);
-            // login(user);
+            setLogger(user);
             navigate('/');
         } catch (err) {
             return console.error(err.message);
@@ -68,8 +64,15 @@ export default function Login() {
                 Sign in to Company
             </div>
             <form action="" onSubmit={onSubmit}>
-                <input type="email" name="email" placeholder='이메일을 입력해주세요' onChange={onChange}/>
-                <input type="password" name="password" placeholder='비밀번호를 입력해주세요' onChange={onChange}/>
+                <div className="single">
+                    <label htmlFor="email">이메일</label>
+                    <input type="email" name="email" id="email" placeholder='이메일을 입력해주세요' onChange={onChange}/>
+                </div>
+                <div className="single">
+                    <label htmlFor="password">비밀번호</label>
+                    <input type="password" name="password" id="password" placeholder='비밀번호를 입력해주세요' onChange={onChange}/>
+                </div>
+
 
                 <button type="submit" className='primary'>로그인</button>
                 <Link to='/register' className='emphasis'>회원가입</Link>

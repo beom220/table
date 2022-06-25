@@ -1,34 +1,46 @@
-import {atom, selector} from "recoil";
+import {atom, selector, selectorFamily} from "recoil";
+import axios from "axios";
 
-
-
-
-const authorState = atom({
-    key: 'authorState',
-    default: {
-        id : '',
-        email : '',
-        grade : '',
-        isLogger : false,
-    },
+const userState = atom({
+    key : 'userStateDefault',
+    default : selector({
+        key : 'userStateRefresh',
+        get : async () => {
+            try {
+                const res = await axios.get('api/member');
+                return res.data.user;
+            } catch (e) { throw e}
+        }
+    })
 })
 
-const authorStateSelector = selector({
-    key: 'authorStateSelector',
-    get: ({get}) => {
-        return get(authorState)
+// const userStateRefresh = selector({
+//     key : 'userStateRefresh',
+//     get : async () => {
+//         try {
+//             const res = await axios.get('api/member');
+//             return res.data.user;
+//         } catch (e) { throw e}
+//     },
+//     set : ({ set}, newValue) => {
+//         set(userState, newValue)
+//     }
+// })
+
+const userClear = selector({
+    key : 'userClear',
+    get : () => async ()  => {
+        try {
+            const res = await axios.get('api/member/logout');
+            console.log('clear : ', res.data)
+            return res.data.user;
+        } catch (e) { throw e }
+    },
+    set : ({ set}, newValue) => {
+        set(userState, newValue)
     }
 })
 
-const authorInputs = atom({
-    key: 'authorInfo',
-    default: {
-        email: '',
-        password: ''
-    },
-})
 
 
-
-export {authorState, authorInputs}
-export {authorStateSelector}
+export { userState, userClear }

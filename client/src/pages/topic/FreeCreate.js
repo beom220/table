@@ -1,14 +1,19 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {useRecoilValue} from "recoil";
+import {userState} from "../../recoil/member/authorize";
 
+
+// Fixme useState 조건적인 구문 사용 불가 => Route 에서 UserCheck
 export default function FreeCreate(){
     const navigate = useNavigate();
+    const user = useRecoilValue(userState);
 
-    const user = {
-        id : 2,
-        nickname :'테스트'
-    }
+    // const user = {
+    //     id : 2,
+    //     nickname :'테스트'
+    // }
 
     const [inputs, setInputs] = useState({
         title:'',

@@ -4,6 +4,13 @@ body {
   background-color: color.$canvas;
 }
 
+.logo{
+  height: 40px;
+  img {
+    height: 100%;
+  }
+}
+
 header{
   padding: 12px 16px;
   background-color: color.$header-bg;

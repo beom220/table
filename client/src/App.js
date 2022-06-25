@@ -1,48 +1,39 @@
-import {RecoilRoot, useRecoilState, useRecoilValue} from "recoil";
-import { Suspense } from "react";
+import { useRecoilValue} from "recoil";
+import {Suspense, lazy} from "react";
+import {BrowserRouter} from "react-router-dom";
 import {ErrorBoundary} from "react-error-boundary";
-import Routers from "./routes";
-import {Authorize} from "./pages/test/authorize";
-import {authorStateSelector} from "./recoil/member/authorize";
-
-export default function App(){
-    return (
-        <RecoilRoot>
-            <ErrorBoundary fallback={<Error/>}>
-                <Suspense fallback={<Loading/>}>
-                    <Routers/>
-                    <Logger/>
-                    <Authorize/>
-                </Suspense>
-            </ErrorBoundary>
-        </RecoilRoot>
-    )
-}
-
-function Loading(){
-    return <div>Loading...</div>
-}
-
-function Error(){
-    return <div>Error...</div>
-}
+import {DebugObserver} from "./components/utils/debug";
+import {PrivateRoute, PublicRoute} from "./routes";
+import {Error, Loading} from "./pages/utils/utils";
+import {Header} from "./components/header";
+import {Navigation} from "./components/navigation";
+import {userState} from "./recoil/member/authorize";
 
 
+export default function App() {
+    const user = useRecoilValue(userState);
+    console.log('userState : ',userState);
 
-
-function Logger(){
-    const authorStates = useRecoilValue(authorStateSelector);
-    const { id, email, grade ,isLogger} = authorStates;
-    console.log('logger- isLogger: ',isLogger)
     return (
         <>
-            <p>email : {email}</p>
-            <p>isLogger : {String(isLogger)}</p>
+            <DebugObserver/>
+            <BrowserRouter>
+                <Suspense fallback={<Error/>}>
+                    <Header/>
+                    <Navigation/>
+                    <ErrorBoundary fallback={<Error/>}>
+
+                        <PublicRoute/>
+
+                    </ErrorBoundary>
+                </Suspense>
+            </BrowserRouter>
         </>
     )
 }
-//
+// <Suspense fallback={}/>
 
-// <BrowserRouter>
-//     <Routers/>
-// </BrowserRouter>
+
+
+
+

@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import NotFound from "./NotFound";
 
 export default function FreeUpdate(){
     const params = useParams();
@@ -110,6 +109,4 @@ export default function FreeUpdate(){
             </>
         );
     }
-
-    return <NotFound/>;
 }

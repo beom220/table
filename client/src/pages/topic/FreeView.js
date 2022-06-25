@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import NotFound from "./NotFound";
 
 export default function FreeView(){
     const params = useParams();
@@ -75,6 +74,4 @@ export default function FreeView(){
             </>
         );
     }
-
-    return <NotFound/>;
 }

@@ -10,7 +10,8 @@ module.exports = (passport) => {
             req.session.save(() => {
                 res.send({
                     success: true,
-                    message : 'logout'
+                    message : 'logout',
+                    user : {},
                 });
             })
         });
@@ -98,11 +99,6 @@ module.exports = (passport) => {
             return res.send({
                 success: true,
                 user : req.user
-                // session : req.session,
-                // user: {
-                //     email: user.email,
-                //     nickname: user.nickname,
-                // }
             })
         })(req, res, next);
 

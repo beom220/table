@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
-import Free from "../Free";
-import FreeView from "../FreeView";
-import FreeCreate from "../FreeCreate";
-import FreeUpdate from "../FreeUpdate";
+import Free from "../pages/topic/Free";
+import FreeView from "../pages/topic/FreeView";
+import FreeCreate from "../pages/topic/FreeCreate";
+import FreeUpdate from "../pages/topic/FreeUpdate";
 
 export default function FreeRoutes(){
     return (
