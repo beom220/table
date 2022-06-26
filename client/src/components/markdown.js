@@ -1,4 +1,3 @@
-import remarkRehype from "remark-rehype";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 

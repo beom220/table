@@ -11,7 +11,7 @@ const memberState = atom({
                 return res.data.user;
             } catch (error) { throw error }
         }
-    })
+    }),
 })
 
 export { memberState }

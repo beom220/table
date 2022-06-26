@@ -1,19 +1,25 @@
-import {BrowserRouter, Link, Route, Router, Routes} from "react-router-dom";
+import {BrowserRouter, Link, Navigate, Route, Router, Routes} from "react-router-dom";
 import Main from "../pages/main";
 import Login from "../pages/member/Login";
 import FreeRoutes from "./free";
 import { Notfound } from "../pages/utils/utils";
 import Register from "../pages/member/Register";
+import {useRecoilValue} from "recoil";
+import {memberState} from "../recoil/member/authorize";
 
-// Fixme useState 조건적인 구문 사용 불가 => Route 에서 UserCheck
+
 function PublicRoute(){
+    const member = useRecoilValue(memberState);
     return (
         <Routes>
             <Route path="/free/*" element={<FreeRoutes/>}/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/register"
+                   element={!member ? <Register/> : <Navigate to="/"/>}
+            />
+            <Route path="/login"
+                   element={!member ? <Login/> : <Navigate to="/"/>}
+            />
             <Route path="/" exact element={<Main/>}/>
-            {/*<Route path="/register" element={<Register/>}/>*/}
             <Route path="*" element={<Notfound/>}/>
         </Routes>
     )

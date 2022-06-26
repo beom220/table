@@ -1,4 +1,4 @@
-import { useRecoilValue} from "recoil";
+import {useRecoilValue} from "recoil";
 import {Suspense, lazy} from "react";
 import {BrowserRouter} from "react-router-dom";
 import {ErrorBoundary} from "react-error-boundary";
@@ -13,6 +13,7 @@ import Contents from "./components/contents";
 
 export default function App() {
     const member = useRecoilValue(memberState);
+    console.log(member)
 
     return (
         <>
