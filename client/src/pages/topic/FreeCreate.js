@@ -1,19 +1,15 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {useRecoilValue} from "recoil";
+import {useRecoilValue, useRecoilRefresher_UNSTABLE} from "recoil";
 import {memberState} from "../../recoil/member/authorize";
+import {getTopicsLists} from "../../recoil/topic/topic";
 
 
-// Fixme useState 조건적인 구문 사용 불가 => Route 에서 UserCheck
 export default function FreeCreate(){
     const navigate = useNavigate();
     const user = useRecoilValue(memberState);
-
-    // const user = {
-    //     id : 2,
-    //     nickname :'테스트'
-    // }
+    const listUpdate = useRecoilRefresher_UNSTABLE(getTopicsLists);
 
     const [inputs, setInputs] = useState({
         title:'',
@@ -43,7 +39,6 @@ export default function FreeCreate(){
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const res = await axios.post('/api/topics/free/create', inputs);
             const {success, message, topicId} = res.data;
@@ -52,7 +47,8 @@ export default function FreeCreate(){
                 console.log(success);
                 return alert(message);
             }
-            alert(message);
+            console.log(res.data);
+            listUpdate();
             return navigate('/free/' + topicId);
         } catch (err) {
             console.error(err.message);
@@ -74,7 +70,11 @@ export default function FreeCreate(){
                     <span>댓글 사용함</span>
                 </label>
                 <label htmlFor="disabled" className="check-box">
-                    <input type="checkbox" id="disabled" name="disabled" onChange={onCheck}/>
+                    <input type="checkbox"
+                           id="disabled" name="disabled"
+                           onChange={onCheck}
+                           checked={!!Number(disabled)}
+                    />
                     <span>작성글 공개안함</span>
                 </label>
                 <button type="button">미리보기</button>
