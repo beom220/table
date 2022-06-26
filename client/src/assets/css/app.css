@@ -52,7 +52,7 @@ input:-webkit-autofill:active {
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   display: flex;
   align-items: center;
@@ -485,6 +485,12 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
   padding: 0;
   list-style-type: none;
 }
+.js-markdown ul li {
+  list-style: decimal;
+}
+.js-markdown ol li {
+  list-style: disc;
+}
 .js-markdown ol[type="1"] {
   list-style-type: decimal;
 }
@@ -533,7 +539,7 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
 }
 .js-markdown .highlight pre,
 .js-markdown pre {
-  padding: 4px;
+  padding: 16px;
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
@@ -554,8 +560,8 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
 }
 .js-markdown blockquote {
   padding: 0 1em;
-  color: var(--color-fg-muted);
-  border-left: 0.25em solid var(--color-border-default);
+  color: #30363d;
+  border-left: 0.25em solid #30363d;
 }
 .js-markdown blockquote > :first-child {
   margin-top: 0;
@@ -569,6 +575,7 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
   width: max-content;
   max-width: 100%;
   overflow: auto;
+  margin-bottom: 12px;
 }
 .js-markdown table th {
   font-weight: 700;

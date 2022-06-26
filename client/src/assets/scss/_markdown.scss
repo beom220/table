@@ -70,6 +70,12 @@
       list-style-type: none;
     }
   }
+  ul li {
+    list-style: decimal;
+  }
+  ol li {
+    list-style: disc;
+  }
 
   ol[type='1'] {
     list-style-type: decimal;
@@ -156,7 +162,7 @@
 
   .highlight pre,
   pre {
-    padding: 4px;
+    padding: 16px;
     overflow: auto;
     // stylelint-disable-next-line primer/typography
     font-size: 85%;
@@ -183,9 +189,9 @@
   blockquote {
     // stylelint-disable-next-line primer/spacing
     padding: 0 1em;
-    color: var(--color-fg-muted);
+    color: color.$border-basic;
     // stylelint-disable-next-line primer/borders
-    border-left: 0.25em solid var(--color-border-default);
+    border-left: 0.25em solid color.$border-basic;
 
     > :first-child {
       margin-top: 0;
@@ -203,6 +209,7 @@
     width: max-content;
     max-width: 100%;
     overflow: auto;
+    margin-bottom: 12px;
 
     th {
       font-weight: 700;
