@@ -7,24 +7,26 @@ import {PrivateRoute, PublicRoute} from "./routes";
 import {Error, Loading} from "./pages/utils/utils";
 import {Header} from "./components/header";
 import {Navigation} from "./components/navigation";
-import {userState} from "./recoil/member/authorize";
+import {memberState} from "./recoil/member/authorize";
+import Contents from "./components/contents";
 
 
 export default function App() {
-    const user = useRecoilValue(userState);
-    console.log('userState : ',userState);
+    const member = useRecoilValue(memberState);
 
     return (
         <>
             <DebugObserver/>
             <BrowserRouter>
-                <Suspense fallback={<Error/>}>
+                <Suspense fallback={<Loading/>}>
                     <Header/>
                     <Navigation/>
                     <ErrorBoundary fallback={<Error/>}>
-
-                        <PublicRoute/>
-
+                        <Suspense fallback={<Loading/>}>
+                            <Contents>
+                                <PublicRoute/>
+                            </Contents>
+                        </Suspense>
                     </ErrorBoundary>
                 </Suspense>
             </BrowserRouter>
@@ -32,7 +34,6 @@ export default function App() {
     )
 }
 // <Suspense fallback={}/>
-
 
 
 

@@ -46,6 +46,106 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+.loading {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading .loading-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+}
+.loading .loading-bar .animate {
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+}
+.loading .loading-bar .animate li {
+  list-style: none;
+  padding: 0;
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  border-radius: 50%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-animation-name: loading-item;
+  -webkit-animation-duration: 6s;
+  -webkit-animation-iteration-count: infinite;
+}
+.loading .loading-bar .animate li:nth-child(0) {
+  -webkit-animation-delay: 0s;
+}
+.loading .loading-bar .animate li:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+}
+.loading .loading-bar .animate li:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+}
+.loading .loading-bar .animate li:nth-child(3) {
+  -webkit-animation-delay: 0.3s;
+}
+.loading .loading-bar .animate li:nth-child(4) {
+  -webkit-animation-delay: 0.4s;
+}
+.loading .loading-bar .animate li:nth-child(5) {
+  -webkit-animation-delay: 0.5s;
+}
+.loading .loading-bar .animate li:nth-child(6) {
+  -webkit-animation-delay: 0.6s;
+}
+
+@keyframes loading-item {
+  0% {
+    -webkit-transform: rotate(0) translateX(-100px) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(88, 166, 255, 0);
+  }
+  5% {
+    -webkit-transform: rotate(0deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.5, 0.9, 0.5);
+    background-color: #58a6ff;
+  }
+  30% {
+    -webkit-transform: rotate(-360deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.5, 0.9, 0.5);
+    background-color: #58a6ff;
+  }
+  55% {
+    -webkit-transform: rotate(-720deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.5, 0.9, 0.5);
+    background-color: #58a6ff;
+  }
+  80% {
+    -webkit-transform: rotate(-1080deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: #58a6ff;
+  }
+  85% {
+    -webkit-transform: rotate(-1080deg) translateX(100px) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(88, 166, 255, 0);
+  }
+  100% {
+    -webkit-transform: rotate(0) translateX(-100px) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(88, 166, 255, 0);
+  }
+}
 .navigation {
   display: flex;
   justify-content: center;
@@ -119,6 +219,13 @@ input:-webkit-autofill:active {
   -webkit-line-clamp: 3;
   line-height: 1.625;
   max-height: 68.25px;
+}
+.board .lists .list-info .desc .js-markdown * {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  border: 0;
+  background: inherit;
 }
 .board .lists .list-info .author, .board .lists .list-info .create {
   font-size: 13px;
@@ -324,6 +431,169 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
   width: 640px;
   margin: 60px auto;
   border-color: #161b22;
+}
+
+.js-markdown code,
+.js-markdown tt {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: #30363d;
+  border-radius: 8px;
+}
+.js-markdown code br,
+.js-markdown tt br {
+  display: none;
+}
+.js-markdown del code {
+  text-decoration: inherit;
+}
+.js-markdown samp {
+  font-size: 85%;
+}
+.js-markdown h1 {
+  padding-bottom: 0.3em;
+  margin-bottom: 16px;
+  font-size: 2em;
+  border-bottom: 1px solid #30363d;
+  margin-top: 24px;
+}
+.js-markdown h1:first-of-type {
+  margin-top: 0;
+}
+.js-markdown h2 {
+  padding-bottom: 0.3em;
+  margin-bottom: 16px;
+  font-size: 1.5em;
+  border-bottom: 1px solid #30363d;
+  margin-top: 24px;
+}
+.js-markdown h3 {
+  font-size: 1.25em;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+.js-markdown p {
+  margin-bottom: 12px;
+}
+.js-markdown ul,
+.js-markdown ol {
+  padding-left: 2em;
+}
+.js-markdown ul.no-list,
+.js-markdown ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+.js-markdown ol[type="1"] {
+  list-style-type: decimal;
+}
+.js-markdown ol[type=a] {
+  list-style-type: lower-alpha;
+}
+.js-markdown ol[type=i] {
+  list-style-type: lower-roman;
+}
+.js-markdown div > ol:not([type]) {
+  list-style-type: decimal;
+}
+.js-markdown ul ul,
+.js-markdown ul ol,
+.js-markdown ol ol,
+.js-markdown ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.js-markdown li > p {
+  margin-top: 8px;
+}
+.js-markdown li + li {
+  margin-top: 8px;
+}
+.js-markdown dl {
+  padding: 0;
+}
+.js-markdown dl dt {
+  padding: 0;
+  margin-top: 8px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 700;
+}
+.js-markdown dl dd {
+  padding: 0 8px;
+  margin-bottom: 8px;
+}
+.js-markdown .highlight {
+  margin-bottom: 4px;
+}
+.js-markdown .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.js-markdown .highlight pre,
+.js-markdown pre {
+  padding: 4px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #30363d;
+  border-radius: 8px;
+}
+.js-markdown pre code,
+.js-markdown pre tt {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.js-markdown blockquote {
+  padding: 0 1em;
+  color: var(--color-fg-muted);
+  border-left: 0.25em solid var(--color-border-default);
+}
+.js-markdown blockquote > :first-child {
+  margin-top: 0;
+}
+.js-markdown blockquote > :last-child {
+  margin-bottom: 0;
+}
+.js-markdown table {
+  display: block;
+  width: 100%;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+}
+.js-markdown table th {
+  font-weight: 700;
+}
+.js-markdown table th,
+.js-markdown table td {
+  padding: 6px 13px;
+  border: 1px solid #30363d;
+}
+.js-markdown table tr {
+  background-color: var(--color-canvas-default);
+  border-top: 1px soild #30363d;
+}
+.js-markdown table tr:nth-child(2n) {
+  background-color: #30363d;
+}
+.js-markdown table img {
+  background-color: transparent;
+}
+.js-markdown hr {
+  height: 4px;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #30363d;
+  border: 0;
 }
 
 /*# sourceMappingURL=app.css.map */

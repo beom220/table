@@ -1,11 +1,11 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { userState} from "../../recoil/member/authorize";
+import {memberState} from "../../recoil/member/authorize";
 import {useRecoilState} from "recoil";
 
 export default function Login() {
-    const [logger, setLogger ] = useRecoilState(userState);
+    const [member, setMember] = useRecoilState(memberState);
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         email: '',
@@ -44,18 +44,15 @@ export default function Login() {
         if (!formCheck()) return false;
         try {
             const res = await axios.post('/api/member/login', inputs)
-            const {success} = res.data;
+            const {success, user} = res.data;
 
             if (!success) {
                 return alert('wrong info')
             }
-            const {user} = res.data;
-            setLogger(user);
-            navigate('/');
-        } catch (err) {
-            return console.error(err.message);
-            // return loginFailed();
-        }
+            setMember(user);
+            navigate(-1);
+
+        } catch (error) { throw error }
     }
 
     return (
@@ -76,7 +73,7 @@ export default function Login() {
 
                 <button type="submit" className='primary'>로그인</button>
                 <Link to='/register' className='emphasis'>회원가입</Link>
-                <Link to='/' className='secondary'>뒤로가기</Link>
+                <Link to='/' className='secondary'>취소</Link>
             </form>
         </div>
     )

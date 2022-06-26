@@ -1,0 +1,240 @@
+@use 'color';
+// stylelint-disable selector-max-type
+.js-markdown {
+  // Inline code snippets
+  code,
+  tt {
+    // stylelint-disable-next-line primer/spacing
+    padding: 0.2em 0.4em;
+    margin: 0;
+    // stylelint-disable-next-line primer/typography
+    font-size: 85%;
+    background-color: color.$border-basic;
+    border-radius: 8px;
+
+    br {
+      display: none;
+    }
+  }
+
+  del code {
+    text-decoration: inherit;
+  }
+
+  samp {
+    // stylelint-disable-next-line primer/typography
+    font-size: 85%;
+  }
+
+  h1 {
+    // stylelint-disable-next-line primer/spacing
+    padding-bottom: 0.3em;
+    margin-bottom: 16px;
+    // stylelint-disable-next-line primer/typography
+    font-size: 2em;
+    border-bottom: 1px solid color.$border-default;
+
+    &:first-of-type {
+      margin-top: 0
+    }
+
+    margin-top: 24px;
+  }
+
+  h2 {
+    // stylelint-disable-next-line primer/spacing
+    padding-bottom: 0.3em;
+    margin-bottom: 16px;
+    // stylelint-disable-next-line primer/typography
+    font-size: 1.5em;
+    border-bottom: 1px solid color.$border-default;
+    margin-top: 24px;
+  }
+
+  h3 {
+    // stylelint-disable-next-line primer/typography
+    font-size: 1.25em;
+    margin-bottom: 16px;
+    margin-top: 24px;
+  }
+
+  p{ margin-bottom: 12px;}
+
+  ul,
+  ol {
+    // stylelint-disable-next-line primer/spacing
+    padding-left: 2em;
+
+    &.no-list {
+      padding: 0;
+      list-style-type: none;
+    }
+  }
+
+  ol[type='1'] {
+    list-style-type: decimal;
+  }
+
+  ol[type='a'] {
+    list-style-type: lower-alpha;
+  }
+
+  ol[type='i'] {
+    list-style-type: lower-roman;
+  }
+
+  // Reset <ol> style to decimal (HTML default) specifically for AsciiDoc
+  // <div><ol> construction (doesn't affect MarkDown)
+  div > ol:not([type]) {
+    list-style-type: decimal;
+  }
+
+  // Did someone complain about list spacing? Encourage them
+  // to create the spacing with their markdown formatting.
+  // List behavior should be controled by the markup, not the css.
+  //
+  // For lists with padding between items, use blank
+  // lines between items. This will generate paragraphs with
+  // padding to space things out.
+  //
+  // - item
+  //
+  // - item
+  //
+  // - item
+  //
+  // For list without padding, don't use blank lines.
+  //
+  // - item
+  // - item
+  // - item
+  //
+  // Modifying the css to emulate these behaviors merely brakes
+  // one case in the process of solving another. Don't change
+  // this unless it's really really a bug.
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  li > p {
+    margin-top: 8px;
+  }
+
+  li + li {
+    margin-top: 8px;
+  }
+
+  dl {
+    padding: 0;
+
+    dt {
+      padding: 0;
+      margin-top: 8px;
+      font-size: 1em;
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    dd {
+      padding: 0 8px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .highlight {
+    margin-bottom: 4px;
+
+    pre {
+      margin-bottom: 0;
+      word-break: normal;
+    }
+  }
+
+  .highlight pre,
+  pre {
+    padding: 4px;
+    overflow: auto;
+    // stylelint-disable-next-line primer/typography
+    font-size: 85%;
+    // stylelint-disable-next-line primer/typography
+    line-height: 1.45;
+    background-color: color.$border-default;
+    border-radius: 8px;
+  }
+
+  pre code,
+  pre tt {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  // blockquote
+  blockquote {
+    // stylelint-disable-next-line primer/spacing
+    padding: 0 1em;
+    color: var(--color-fg-muted);
+    // stylelint-disable-next-line primer/borders
+    border-left: 0.25em solid var(--color-border-default);
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // table
+  table {
+    display: block;
+    width: 100%; // keep for backwards compatibility
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+
+    th {
+      font-weight: 700;
+    }
+
+    th,
+    td {
+      // stylelint-disable-next-line primer/spacing
+      padding: 6px 13px;
+      border: 1px solid color.$border-basic;
+    }
+
+    tr {
+      background-color: var(--color-canvas-default);
+      border-top: 1px soild color.$border-basic;
+
+      &:nth-child(2n) {
+        background-color: color.$border-basic;
+      }
+    }
+
+    img {
+      background-color: transparent;
+    }
+  }
+
+
+  hr {
+    height: 4px;
+    padding: 0;
+    margin: 24px 0;
+    background-color: color.$border-basic;
+    border: 0;
+  }
+}

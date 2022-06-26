@@ -1,49 +1,12 @@
 import {Link, useParams} from 'react-router-dom';
-import {useEffect, useState} from "react";
-import axios from "axios";
 import {useRecoilValue} from "recoil";
 import {getTopicsLists} from "../../recoil/topic/topic";
-import {userState} from "../../recoil/member/authorize";
+import {memberState} from "../../recoil/member/authorize";
+import ShowMarkDown from "../../components/markdown";
 
 export default function Free(){
-    // const [ data, setData ] = useState({});
-    // const [ dataCount, setDataCount] = useState('');
-
-    // const getFreeBoard = async () => {
-    //     try {
-    //         const res = await axios.get('api/topics/free');
-    //         const {success, message} = res.data;
-    //
-    //         if (!success) {
-    //             console.log('에러뜸')
-    //         }
-    //         setData(message);
-    //         setDataCount(message.length);
-    //     } catch (err){
-    //         console.error(err);
-    //     }
-    // }
-    //
-    // useEffect(() => {
-    //     getFreeBoard();
-    //     console.log('dataCount : ',dataCount)
-    // },[dataCount])
-
-    //
-    // if(!!dataCount){
-    //     return (
-    //         <div className="board">
-    //             <h1 className="title">Free Board</h1>
-    //             <Link to="/free/create">Create</Link>
-    //             {/* 최근글이 상위로*/}
-    //             {data.slice(0).reverse().map((v, i) => (
-    //                 <Topic data={v} key={i}/>
-    //             ))}
-    //         </div>
-    //     )
-    // }
+    const user = useRecoilValue(memberState);
     const topicLists = useRecoilValue(getTopicsLists);
-    const user = useRecoilValue(userState);
 
     return (
         <div className="board">
@@ -64,7 +27,9 @@ function Topic({ list }) {
                 <h2 className="list-title">{list.title}</h2>
             </Link>
             <div className="list-info">
-                <p className="desc">{list.description}</p>
+                <Link to={link} className="desc">
+                    <ShowMarkDown children={list.description}/>
+                </Link>
                 <p className="author">{list.nickname}</p>
             </div>
         </article>

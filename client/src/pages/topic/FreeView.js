@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import ShowMarkDown from "../../components/markdown";
 
 export default function FreeView(){
     const params = useParams();
@@ -69,7 +70,7 @@ export default function FreeView(){
                     <h2>제목 : {data.title}</h2>
                     <p>글의아이디 : {data.id}</p>
                     <p>작성자 : {data.name}</p>
-                    <p>글 : {data.description}</p>
+                    <ShowMarkDown children={data.description}/>
                 </div>
             </>
         );
