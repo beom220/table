@@ -1,4 +1,4 @@
-import {Redirect, Route, Routes, Navigate} from "react-router-dom";
+import { Route, Routes, Navigate} from "react-router-dom";
 import Free from "../pages/topic/Free";
 import FreeView from "../pages/topic/FreeView";
 import FreeCreate from "../pages/topic/FreeCreate";

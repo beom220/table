@@ -8,13 +8,13 @@ import {getTopicsLists} from "../../recoil/topic/topic";
 
 export default function FreeCreate(){
     const navigate = useNavigate();
-    const user = useRecoilValue(memberState);
+    const member = useRecoilValue(memberState);
     const listUpdate = useRecoilRefresher_UNSTABLE(getTopicsLists);
 
     const [inputs, setInputs] = useState({
         title:'',
         description:'',
-        memberId : user.id,
+        memberId : member.id,
         useComment : '1',
         disabled : '0',
     });

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './assets/css/app.css';
-import {DebugObserver} from "./components/utils/debug";
 import {RecoilRoot} from "recoil";
 // import reportWebVitals from './reportWebVitals';
 

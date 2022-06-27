@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {memberState} from "../../recoil/member/authorize";
-import {useRecoilState, useSetRecoilState} from "recoil";
+import {useSetRecoilState} from "recoil";
 
 export default function Login() {
     const setMember = useSetRecoilState(memberState);

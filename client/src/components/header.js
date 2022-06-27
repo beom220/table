@@ -28,7 +28,7 @@ function Header(){
             <header>
                 <Link to="/" className="logo"><img src={logo} alt="logo"/></Link>
                 <div className="utils">
-                    <Link to='/login' className='primary'>Login</Link>
+                    <Link to='/login' className='button primary'>Login</Link>
                 </div>
             </header>
         )
@@ -37,8 +37,8 @@ function Header(){
         <header>
             <Link to="/" className="logo"><img src={logo} alt="logo"/></Link>
             <div className="utils">
-                <Link to='/mypage' className='primary'>My page</Link>
-                <button className="secondary" type="button" onClick={logOut}>Logout</button>
+                <Link to='/mypage' className='button primary'>My page</Link>
+                <button className="button secondary" type="button" onClick={logOut}>Logout</button>
             </div>
         </header>
     )

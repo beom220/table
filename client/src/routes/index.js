@@ -1,4 +1,4 @@
-import {BrowserRouter, Link, Navigate, Route, Router, Routes} from "react-router-dom";
+import { Navigate, Route, Routes} from "react-router-dom";
 import Main from "../pages/main";
 import Login from "../pages/member/Login";
 import FreeRoutes from "./free";

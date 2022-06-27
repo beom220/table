@@ -1,5 +1,5 @@
 @use "color";
-
+@use "common";
 body {
   background-color: color.$canvas;
 }
@@ -22,28 +22,6 @@ header{
     display: flex;
     align-items: center;
     gap: 8px;
-
-    a, button{
-      padding: 6px 16px;
-      border-radius: 5px;
-      font-size: 13px;
-      cursor: pointer;
-
-      &.primary{
-        background-color: color.$button-primary;
-        color: color.$buttons-text-primary;
-        &:hover{
-          background-color: color.$button-primary-hover;
-        }
-      }
-      &.secondary{
-        background-color: color.$button-secondary;
-        color: color.$buttons-text-secondary;
-        &:hover{
-          background-color: color.$button-secondary-hover;
-        }
-      }
-    }
   }
 }
 
@@ -62,7 +40,17 @@ header{
 }
 
 .contents{
+  //max-width: 640px;
   width: 640px;
   margin: 60px auto;
   border-color: color.$item-header;
+  @include common.media-breakpoint-down(md){
+    width: 92%;
+  }
+}
+
+.side-by-side{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

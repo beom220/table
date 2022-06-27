@@ -10,8 +10,10 @@ export default function Free() {
 
     return (
         <div className="board">
-            <h1 className="title">Free Board</h1>
-            {!user ? null : <Link to='/free/create'>글쓰기</Link>}
+            <div className="side-by-side">
+                <h1 className="title">Free Board</h1>
+                {!user ? null : <Link to='/free/create' className="button secondary">글쓰기</Link>}
+            </div>
             {topicLists.slice(0).reverse().map((list, index) => {
                 return <Topic list={list} key={index}/>
             })}
@@ -22,16 +24,18 @@ export default function Free() {
 function Topic({list}) {
     const link = `/free/${list.id}`;
     return (
-        <article className="lists">
-            <Link to={link}>
-                <h2 className="list-title">{list.title}</h2>
-            </Link>
-                <div className="list-info">
-                    <div className="desc">
-                        <ShowMarkDown children={list.description}/>
+        <article>
+            <p className="author">{list.nickname}</p>
+            <div className="lists">
+                <Link to={link}>
+                    <div className="list-info">
+                        <h2 className="list-title">{list.title}</h2>
+                        <div className="desc">
+                            <ShowMarkDown children={list.description}/>
+                        </div>
                     </div>
-                    <p className="author">{list.nickname}</p>
-                </div>
+                </Link>
+            </div>
         </article>
     );
 }

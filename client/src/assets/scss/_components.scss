@@ -1,114 +1,121 @@
 @use "color";
 
-.loading{
+.loading {
   position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, .6);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .loading-bar{
-    position:absolute;
-    top:50%;
-    left:50%;
-    margin-left:-30px;
-    margin-top:-30px;
+  .loading-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
 
-    .animate{
-      width:60px;
-      height:60px;
-      margin:0;
-      padding:0;
+    .animate {
+      width: 60px;
+      height: 60px;
+      margin: 0;
+      padding: 0;
 
-      li{
-        list-style:none;
-        padding:0;
-        width:5px;
-        height:5px;
-        position:absolute;
-        border-radius:50%;
-        margin:auto;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
-        -webkit-animation-name:loading-item;
-        -webkit-animation-duration:6s;
-        -webkit-animation-iteration-count:infinite;
+      li {
+        list-style: none;
+        padding: 0;
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        border-radius: 50%;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-animation-name: loading-item;
+        -webkit-animation-duration: 6s;
+        -webkit-animation-iteration-count: infinite;
 
-        &:nth-child(0){
-          -webkit-animation-delay:0s;
+        &:nth-child(0) {
+          -webkit-animation-delay: 0s;
         }
-        &:nth-child(1){
-          -webkit-animation-delay:0.1s;
+
+        &:nth-child(1) {
+          -webkit-animation-delay: 0.1s;
         }
-        &:nth-child(2){
-          -webkit-animation-delay:0.2s;
+
+        &:nth-child(2) {
+          -webkit-animation-delay: 0.2s;
         }
-        &:nth-child(3){
-          -webkit-animation-delay:0.3s;
+
+        &:nth-child(3) {
+          -webkit-animation-delay: 0.3s;
         }
-        &:nth-child(4){
-          -webkit-animation-delay:0.4s;
+
+        &:nth-child(4) {
+          -webkit-animation-delay: 0.4s;
         }
-        &:nth-child(5){
-          -webkit-animation-delay:0.5s;
+
+        &:nth-child(5) {
+          -webkit-animation-delay: 0.5s;
         }
-        &:nth-child(6){
-          -webkit-animation-delay:0.6s;
+
+        &:nth-child(6) {
+          -webkit-animation-delay: 0.6s;
         }
       }
     }
   }
 }
+
 @keyframes loading-item {
   0% {
-    -webkit-transform:rotate(0) translateX(-100px) translateY(30px);
-    -webkit-animation-timing-function:linear;
-    background-color:rgba(color.$loading-bar,0);
+    -webkit-transform: rotate(0) translateX(-100px) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(color.$loading-bar, 0);
   }
   5% {
-    -webkit-transform:rotate(0deg) translateX(0) translateY(30px);
-    -webkit-animation-timing-function:cubic-bezier(0.1,0.5,0.9,0.5);
-    background-color:rgba(color.$loading-bar,1);
+    -webkit-transform: rotate(0deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.5, 0.9, 0.5);
+    background-color: rgba(color.$loading-bar, 1);
   }
   30% {
-    -webkit-transform:rotate(-360deg) translateX(0) translateY(30px);
-    -webkit-animation-timing-function:cubic-bezier(0.1,0.5,0.9,0.5);
-    background-color:rgba(color.$loading-bar,1);
+    -webkit-transform: rotate(-360deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.5, 0.9, 0.5);
+    background-color: rgba(color.$loading-bar, 1);
   }
   55% {
-    -webkit-transform:rotate(-720deg) translateX(0) translateY(30px);
-    -webkit-animation-timing-function:cubic-bezier(0.1,0.5,0.9,0.5);
-    background-color:rgba(color.$loading-bar,1);
+    -webkit-transform: rotate(-720deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: cubic-bezier(0.1, 0.5, 0.9, 0.5);
+    background-color: rgba(color.$loading-bar, 1);
   }
   80% {
-    -webkit-transform:rotate(-1080deg) translateX(0) translateY(30px);
-    -webkit-animation-timing-function:linear;
-    background-color:rgba(color.$loading-bar,1);
+    -webkit-transform: rotate(-1080deg) translateX(0) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(color.$loading-bar, 1);
   }
-  85%{
-    -webkit-transform:rotate(-1080deg) translateX(100px) translateY(30px);
-    -webkit-animation-timing-function:linear;
-    background-color:rgba(color.$loading-bar,0);
+  85% {
+    -webkit-transform: rotate(-1080deg) translateX(100px) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(color.$loading-bar, 0);
   }
   100% {
-    -webkit-transform:rotate(0) translateX(-100px) translateY(30px);
-    -webkit-animation-timing-function:linear;
-    background-color:rgba(color.$loading-bar,0);
+    -webkit-transform: rotate(0) translateX(-100px) translateY(30px);
+    -webkit-animation-timing-function: linear;
+    background-color: rgba(color.$loading-bar, 0);
   }
 }
 
-@mixin icon{
+@mixin icon {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -119,44 +126,48 @@
   @content;
 }
 
-@mixin button{
-  &.primary{
+@mixin button {
+  &.primary {
     background-color: color.$button-primary;
     color: color.$buttons-text-primary;
-    &:hover{
+
+    &:hover {
       background-color: color.$button-primary-hover;
     }
   }
-  &.secondary{
+  &.secondary {
     background-color: color.$button-secondary;
     color: color.$buttons-text-secondary;
-    &:hover{
+
+    &:hover {
       background-color: color.$button-secondary-hover;
     }
   }
-  &.emphasis{
+  &.emphasis {
     background-color: color.$button-emphasis;
     color: color.$buttons-text-primary;
-    &:hover{
+
+    &:hover {
       background-color: color.$button-emphasis-hover;
     }
   }
 }
 
-.navigation{
+.navigation {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
+
   a {
     font-size: 14px;
     padding: 20px 24px 8px;
     text-align: center;
     color: color.$color-secondary;
     position: relative;
-    transition : color ease .4s;
+    transition: color ease .4s;
 
-    &::after{
+    &::after {
       content: '';
       display: block;
       position: absolute;
@@ -165,17 +176,19 @@
       left: 0;
       top: 100%;
       opacity: 0;
-      transition : opacity ease-in-out .4s;
+      transition: opacity ease-in-out .4s;
     }
+
     &:hover {
       color: color.$color-basic;
+
       &::after {
         background-color: color.$color-secondary;
         opacity: 1;
       }
     }
 
-    &.active{
+    &.active {
       color: color.$color-basic;
       //border-bottom: 2px solid color.$button-emphasis-hover;
       &::after {
@@ -186,33 +199,60 @@
   }
 }
 
-.board{
-  .title{
+.button {
+  padding: 6px 16px;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+
+  // colors
+  &.primary {
+    background-color: color.$button-primary;
+    color: color.$buttons-text-primary;
+
+    &:hover {
+      background-color: color.$button-primary-hover;
+    }
+  }
+
+  &.secondary {
+    background-color: color.$button-secondary;
+    color: color.$buttons-text-secondary;
+
+    &:hover {
+      background-color: color.$button-secondary-hover;
+    }
+  }
+}
+
+.board {
+  .title {
     font-size: 24px;
   }
-  .lists{
+
+  .lists {
     margin-top: 24px;
     overflow: hidden;
-    border : {
+    background-color: #161b22;
+    border: {
       color: color.$border-basic;
       style: solid;
       width: 1px;
       radius: 6px;
     }
 
-    .list-title{
-      background-color: color.$header-bg;
-      padding: 16px 24px;
+    .list-title {
       color: inherit;
     }
-    .list-info{
+
+    .list-info {
       border-top: 1px solid color.$border-basic;
       padding: 16px 24px;
       display: flex;
       flex-direction: column;
       gap: 16px;
 
-      .desc{
+      .desc {
         font-size: 14px;
         word-break: keep-all;
 
@@ -220,9 +260,10 @@
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         line-height: 1.625;
         max-height: 68.25px;
+
         .js-markdown * {
           font-size: inherit;
           line-height: inherit;
@@ -232,7 +273,7 @@
         }
       }
 
-      .author, .create{
+      .author, .create {
         font-size: 13px;
         text-align: right;
       }

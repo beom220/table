@@ -1,10 +1,3 @@
-/**---------------------------------------**/
-@font-face {
-  font-family: "InfinitySans-RegularA1";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
 html, body {
   margin: 0;
   padding: 0;
@@ -16,7 +9,7 @@ body * {
   padding: 0;
   margin: 0;
   line-height: 1.125;
-  font-family: "InfinitySans-RegularA1", sans-serif;
+  font-family: "Pretendard", Sans-serif;
   font-size: inherit;
   color: #c9d1d9;
 }
@@ -186,20 +179,40 @@ input:-webkit-autofill:active {
   background-color: #58a6ff;
 }
 
+.button {
+  padding: 6px 16px;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.button.primary {
+  background-color: #238636;
+  color: #fff;
+}
+.button.primary:hover {
+  background-color: #2ea043;
+}
+.button.secondary {
+  background-color: #21262d;
+  color: #c9d1d9;
+}
+.button.secondary:hover {
+  background-color: #30363d;
+}
+
 .board .title {
   font-size: 24px;
 }
 .board .lists {
   margin-top: 24px;
   overflow: hidden;
+  background-color: #161b22;
   border-color: #30363d;
   border-style: solid;
   border-width: 1px;
   border-radius: 6px;
 }
 .board .lists .list-title {
-  background-color: #161b22;
-  padding: 16px 24px;
   color: inherit;
 }
 .board .lists .list-info {
@@ -216,7 +229,7 @@ input:-webkit-autofill:active {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   line-height: 1.625;
   max-height: 68.25px;
 }
@@ -394,26 +407,6 @@ header .utils {
   align-items: center;
   gap: 8px;
 }
-header .utils a, header .utils button {
-  padding: 6px 16px;
-  border-radius: 5px;
-  font-size: 13px;
-  cursor: pointer;
-}
-header .utils a.primary, header .utils button.primary {
-  background-color: #238636;
-  color: #fff;
-}
-header .utils a.primary:hover, header .utils button.primary:hover {
-  background-color: #2ea043;
-}
-header .utils a.secondary, header .utils button.secondary {
-  background-color: #21262d;
-  color: #c9d1d9;
-}
-header .utils a.secondary:hover, header .utils button.secondary:hover {
-  background-color: #30363d;
-}
 
 .box-header {
   padding: 16px;
@@ -431,6 +424,17 @@ header .utils a.secondary:hover, header .utils button.secondary:hover {
   width: 640px;
   margin: 60px auto;
   border-color: #161b22;
+}
+@media (max-width: 767.98px) {
+  .contents {
+    width: 92%;
+  }
+}
+
+.side-by-side {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .js-markdown code,
