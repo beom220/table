@@ -87,21 +87,25 @@ form {
     display: flex;
     align-items: center;
     position: relative;
-    padding-left: 28px;
+    padding: 4px 0 4px 28px;
     input{
       width: 0;
       height: 18px;
+      position: absolute;
+      left: 0;
+      top: 0;
       &::before{
         display: block;
         content: '';
         position: absolute;
-        top: 0;
+        top: calc(50% + 2px);
         left: 0;
         width: 18px;
         height: 18px;
         border: 1px solid #333;
         border-radius: 4px;
         background-color: color.$input-basic-bg;
+        transform: translateY(-50%);
       }
       &:checked::before{
         background-color: color.$button-primary-hover;
@@ -110,7 +114,7 @@ form {
         vertical-align: bottom;
         @include components.icon{
           content: 'check';
-          font-size: 16px;
+          font-size: 18px;
         }
       }
       &:focus::before{

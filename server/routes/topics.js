@@ -69,7 +69,7 @@ router.post('/free/create', (req, res) => {
 router.get('/free/:free_id', (req, res, next) => {
     const freeId = path.parse(req.params.free_id).base;
 
-    const sqlQuery = `SELECT free.id, title, description, useComment, disabled, member.nickname, memberId
+    const sqlQuery = `SELECT free.id, title, description, useComment, disabled, free.createdAt, member.nickname, memberId
                       FROM free
                                LEFT JOIN member ON free.memberId = member.id
                       WHERE free.id = ?`;
@@ -94,7 +94,7 @@ router.get('/free/:free_id', (req, res, next) => {
 router.get('/free', (req, res, next) => {
     // const sqlQuery = `SELECT free.id, title, description, nickname
     //                   FROM free LEFT JOIN member ON free.memberId = member.id`;
-    const sqlQuery = `SELECT free.id, title, description, useComment, disabled, member.nickname, memberId
+    const sqlQuery = `SELECT free.id, title, description, useComment, disabled, free.createdAt, member.nickname, memberId
                       FROM free
                                LEFT JOIN member ON free.memberId = member.id`;
     db.query(sqlQuery, (error, rows) => {

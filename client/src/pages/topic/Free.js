@@ -3,6 +3,7 @@ import {useRecoilValue} from "recoil";
 import {getTopicsLists} from "../../recoil/topic/topic";
 import {memberState} from "../../recoil/member/authorize";
 import ShowMarkDown from "../../components/markdown";
+import {useTimeForToday} from "../../components/utils/today";
 
 export default function Free() {
     const user = useRecoilValue(memberState);
@@ -23,18 +24,22 @@ export default function Free() {
 
 function Topic({list}) {
     const link = `/free/${list.id}`;
+
     return (
-        <article>
-            <p className="author">{list.nickname}</p>
-            <div className="lists">
-                <Link to={link}>
-                    <div className="list-info">
-                        <h2 className="list-title">{list.title}</h2>
-                        <div className="desc">
-                            <ShowMarkDown children={list.description}/>
+        <article className="lists">
+            <div className="list">
+                <p className="author">{list.nickname}</p>
+                <p className="created">{useTimeForToday(list.createdAt)}</p>
+                <div className="card">
+                    <Link to={link}>
+                        <div className="list-info">
+                            <h2 className="list-title">{list.title}</h2>
+                            <div className="desc">
+                                <ShowMarkDown children={list.description}/>
+                            </div>
                         </div>
-                    </div>
-                </Link>
+                    </Link>
+                </div>
             </div>
         </article>
     );

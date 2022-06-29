@@ -9,22 +9,11 @@ const memberState = atom({
         get : async () => {
             try {
                 const res = await axios.get('api/member');
+                console.log(res.data.user);
                 return res.data.user;
             } catch (error) { throw error }
         }
     }),
 })
-// const memberState = selector({
-//     key : 'memberStateRefresh',
-//     get : async ({ get }) => {
-//         const oldMember = get(memberDefault);
-//         try {
-//             const res = await axios.get('api/member');
-//             return !oldMember ? res.data.user : null;
-//         } catch (error) {
-//             throw error
-//         }
-//     }
-// })
 
 export { memberState }

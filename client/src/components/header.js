@@ -10,16 +10,16 @@ function Header(){
     const setMember = useSetRecoilState(memberState);
     const member = useRecoilValue(memberState);
     useEffect(() => {
-        console.log(member);
-    }, [member])
+        console.log('header : ',member);
+    },[5])
 
     const navigate = useNavigate();
 
     const logOut = async () => {
         try {
             const res = await axios.get('api/member/logout');
-            setMember(null);
             navigate('/');
+            setMember(null);
         } catch (error) { throw error }
     };
 

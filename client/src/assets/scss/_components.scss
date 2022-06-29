@@ -218,11 +218,24 @@
   &.secondary {
     background-color: color.$button-secondary;
     color: color.$buttons-text-secondary;
+    border : 1px solid color.$border-default;
 
     &:hover {
       background-color: color.$button-secondary-hover;
     }
   }
+}
+.buttons{
+  display: flex;
+  &.right{
+    justify-content: flex-end;
+  }
+}
+
+.labels{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .board {
@@ -232,15 +245,27 @@
 
   .lists {
     margin-top: 24px;
-    overflow: hidden;
-    background-color: #161b22;
-    border: {
-      color: color.$border-basic;
-      style: solid;
-      width: 1px;
-      radius: 6px;
-    }
 
+    .list{
+      .card{
+        margin-top: 8px;
+        overflow: hidden;
+        background-color: #161b22;
+        border: {
+          color: color.$border-basic;
+          style: solid;
+          width: 1px;
+          radius: 6px;
+        }
+      }
+      .author, .created {
+        font-size: 13px;
+        display: inline-block;
+      }
+      .created{
+        margin-left: 8px;
+      }
+    }
     .list-title {
       color: inherit;
     }
@@ -266,17 +291,68 @@
 
         .js-markdown * {
           font-size: inherit;
-          line-height: inherit;
+          line-height: 1.25;
+          font-weight: 300;
           margin: 0;
           border: 0;
           background: inherit;
         }
       }
-
-      .author, .create {
-        font-size: 13px;
-        text-align: right;
-      }
     }
+  }
+}
+
+
+.view{
+  margin-bottom: 160px;
+  .info{
+    margin-bottom: 24px;
+    h2{
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+    span{
+      font-size: 13px;
+    }
+  }
+  .button{
+    display: inline-flex;
+    align-self: flex-end;
+    margin-top: 24px;
+  }
+}
+
+.comment{
+  form{
+    border: 0;
+    padding: 0;
+    textarea{
+      min-height: 80px;
+    }
+  }
+}
+
+.pager{
+  display: flex;
+  gap: 2%;
+  margin-bottom: 24px;
+  .next, .prev{
+    width: 49%;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    span {
+      font-size: 13px;
+      color: color.$color-secondary;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+  .next {
+    text-align: right;
+    margin-left: auto;
   }
 }

@@ -8,7 +8,7 @@ const getTopicsLists = selector({
         try {
             const res = await axios.get('/api/topics/free/');
             const {message} = res.data
-            // console.log(data);
+            console.log(message);
             return message;
         } catch (err) {
             throw err;
