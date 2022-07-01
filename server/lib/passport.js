@@ -10,9 +10,9 @@ module.exports = (app) => {
     //  전달받은 data를 세션Store에 저장
     passport.serializeUser((user, done) => {
         // 유저가 아니면 세션 생성 안함
-        if(!user){
-            return done(null, false, {message : 'is not user'})
-        }
+        // if(!user){
+        //     return done(null, false, {message : 'is not user'})
+        // }
         console.log('serializeUser : ',user)
         done(null, user.email);
     });
