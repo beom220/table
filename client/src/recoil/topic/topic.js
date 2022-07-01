@@ -1,14 +1,13 @@
 import { selector, selectorFamily } from "recoil";
+import { v1 } from "uuid";
 import axios from "axios";
-import {memberState} from "../member/authorize";
 
 const getTopicsLists = selector({
-    key: 'getTopicsLists',
+    key: `getTopicsLists/${v1()}`,
     get : async () => {
         try {
             const res = await axios.get('/api/topics/free/');
             const {message} = res.data
-            console.log(message);
             return message;
         } catch (err) {
             throw err;
@@ -29,11 +28,11 @@ const getTopic = selectorFamily({
     }
 })
 
-const createTopic = selectorFamily({
-    key: 'createTopic',
-    get : (inputs) => async () => {
+const getComment = selectorFamily({
+    key: 'getComment',
+    get : (param) => async () => {
         try {
-            const res = await axios.post('/api/topics/free/create', inputs);
+            const res = await axios.get('/api/comment/' + param);
             const { message } = res.data;
             return message;
         } catch (err) {
@@ -42,4 +41,5 @@ const createTopic = selectorFamily({
     }
 })
 
-export { getTopicsLists, getTopic };
+
+export { getTopicsLists, getTopic, getComment };

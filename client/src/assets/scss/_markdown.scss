@@ -2,6 +2,7 @@
 // stylelint-disable selector-max-type
 .js-markdown {
   // Inline code snippets
+  img{ max-width: 100%;}
   code,
   tt {
     // stylelint-disable-next-line primer/spacing

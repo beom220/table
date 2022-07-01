@@ -1,11 +1,11 @@
 @use "color";
 @use "components";
 
-.login-form{
+.login-form {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform : translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 540px;
 }
 
@@ -16,46 +16,46 @@ form {
   flex-direction: column;
   gap: 12px;
   font-size: 13px;
-  border : {
+  border: {
     color: color.$border-basic;
     style: solid;
     width: 1px;
   }
 
-  .single{
+  .single {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  input:not([type=radio],[type=checkbox]){
+  input:not([type=radio],[type=checkbox]) {
     display: block;
     width: 100%;
     padding: 12px 8px;
     background-color: color.$input-basic-bg;
     color: color.$input-basic;
-    border :{
+    border: {
       radius: 5px;
       style: solid;
       width: 1px;
       color: color.$border-basic;
     }
 
-    &::placeholder{
+    &::placeholder {
       color: color.$place-holder-basic;
     }
 
-    &:focus{
+    &:focus {
       outline: {
         style: solid;
         width: 1px;
-        color : color.$border-focus;
+        color: color.$border-focus;
       }
     }
   }
 
-  textarea{
+  textarea {
     display: block;
     width: 100%;
     padding: 12px 8px;
@@ -63,38 +63,41 @@ form {
     color: color.$input-basic;
     min-height: 300px;
     white-space: pre-wrap;
-    border : {
+    resize: none;
+    border: {
       radius: 5px;
       style: solid;
       width: 1px;
       color: color.$border-basic;
     }
 
-    &::placeholder{
+    &::placeholder {
       color: color.$place-holder-basic;
     }
 
-    &:focus{
+    &:focus {
       outline: {
         style: solid;
         width: 1px;
-        color : color.$border-focus;
+        color:  color.$button-primary-hover;
       }
     }
   }
 
-  label.check-box{
+  label.check-box {
     display: flex;
     align-items: center;
     position: relative;
     padding: 4px 0 4px 28px;
-    input{
+
+    input {
       width: 0;
       height: 18px;
       position: absolute;
       left: 0;
       top: 0;
-      &::before{
+
+      &::before {
         display: block;
         content: '';
         position: absolute;
@@ -107,25 +110,27 @@ form {
         background-color: color.$input-basic-bg;
         transform: translateY(-50%);
       }
-      &:checked::before{
+
+      &:checked::before {
         background-color: color.$button-primary-hover;
         color: color.$color-basic;
         text-align: center;
         vertical-align: bottom;
-        @include components.icon{
+        @include components.icon {
           content: 'check';
           font-size: 18px;
         }
       }
-      &:focus::before{
-        border-color : color.$border-focus;
+
+      &:focus::before {
+        border-color: color.$border-focus;
       }
     }
   }
 
-  button, a{
+  button, a {
     text-align: center;
-    border : 1px solid color.$border-default;
+    border: 1px solid color.$border-default;
     border-radius: 5px;
     padding: 8px 8px;
     cursor: pointer;
@@ -133,3 +138,5 @@ form {
     @include components.button;
   }
 }
+
+

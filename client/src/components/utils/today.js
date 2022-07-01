@@ -1,8 +1,8 @@
-function useToday(){
-    const year = new Date().getFullYear();
-    const month = ("0" + (1 + new Date().getMonth())).slice(-2);
-    const date = ("0" + new Date().getDate()).slice(-2);
-    return year + month + date;
+function useFullDate(value){
+    const year = new Date(value).getFullYear();
+    const month = ("0" + (1 + new Date(value).getMonth())).slice(-2);
+    const date = ("0" + new Date(value).getDate()).slice(-2);
+    return `${year}.${month}.${date}`;
 }
 
 
@@ -29,4 +29,4 @@ function useTimeForToday(value) {
     return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
 
-export { useTimeForToday, useToday}
+export { useTimeForToday, useFullDate}
