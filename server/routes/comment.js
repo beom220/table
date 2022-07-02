@@ -37,7 +37,7 @@ router.post('/create', (req, res) => {
 router.get('/:free_id', (req, res, next) => {
     const freeId = path.parse(req.params.free_id).base;
 
-    const sqlQuery = `SELECT C.id, description, createdAt, M.nickname
+    const sqlQuery = `SELECT C.id, description, createdAt, M.nickname, memberId
                       FROM comment as C
                                LEFT JOIN member as M ON C.memberId = M.id
                       WHERE C.topicId = ?`;
