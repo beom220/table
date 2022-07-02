@@ -96,7 +96,7 @@ router.get('/free', (req, res, next) => {
     //                   FROM free LEFT JOIN member ON free.memberId = member.id`;
     const sqlQuery = `SELECT free.id, title, description, useComment, disabled, free.createdAt, member.nickname, memberId
                       FROM free
-                               LEFT JOIN member ON free.memberId = member.id`;
+                               LEFT JOIN member ON free.memberId = member.id WHERE disabled='0' ORDER BY createdAt DESC`;
     db.query(sqlQuery, (error, rows) => {
             if (error) {
                 res.send({
