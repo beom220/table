@@ -22,8 +22,13 @@ function useTimeForToday(value) {
     }
 
     const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
+    if (betweenTimeDay < 7) {
         return `${betweenTimeDay}일전`;
+    }
+
+    const betweenTimeWeek = Math.floor(betweenTime / 60 / 24 / 7);
+    if (betweenTimeWeek < 365 / 7 ) {
+        return `${betweenTimeWeek}주전`;
     }
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
