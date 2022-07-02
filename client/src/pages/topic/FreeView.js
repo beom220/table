@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {ModalConfirm} from "../utils/utils";
 import axios from "axios";
 import {memberState} from "../../recoil/member/authorize";
+import Pager from "../../components/utils/pager";
 
 
 export default function FreeView() {
@@ -14,7 +15,9 @@ export default function FreeView() {
     const param = Number(params.name);
     const list = useRecoilValue(getTopic(param));
     const topicLists = useRecoilValue(getTopicsLists);
+
     const fullDate = useFullDate(list.createdAt);
+    const navigate = useNavigate();
 
     const [modal, setModal] = useState(false);
     const modalClose = () => {
@@ -41,7 +44,7 @@ export default function FreeView() {
     }, [modal]);
 
     useEffect(() => {
-        scrollTop()
+        scrollTop();
     }, [list])
 
     return (
@@ -55,16 +58,14 @@ export default function FreeView() {
                 <ShowMarkDown children={list.description}/>
             </div>
 
-            <div className="pager">
-                <Prev param={param} array={topicLists}/>
-                <Next param={param} array={topicLists}/>
-            </div>
+            <Pager current={list} arr={topicLists}/>
+
 
             <div className="buttons right">
                 <Link to="/free" className="button secondary">목록으로</Link>
             </div>
 
-            {!!!list.useComment ? null :
+            {!list.useComment ? null :
                 <>
                     <Comment param={param}/>
                     <ViewComment param={param}/>
@@ -74,7 +75,7 @@ export default function FreeView() {
     )
 }
 
-function Comment({param}){
+function Comment({param}) {
     const commentsUpdate = useRecoilRefresher_UNSTABLE(getComment(param));
     const member = useRecoilValue(memberState);
 
@@ -84,9 +85,9 @@ function Comment({param}){
         topicId: param,
     });
 
-    useEffect(()=>{
+    useEffect(() => {
         setInputs({...inputs, description: ''});
-    },[param])
+    }, [param])
 
     const onChange = (e) => {
         const {value, name} = e.target;
@@ -97,11 +98,11 @@ function Comment({param}){
     }
 
     const onSubmit = async (e) => {
-        if(!member) {
+        e.preventDefault();
+        if (!member) {
             alert('로그인하세용ㅎ');
             return false;
         }
-        e.preventDefault();
         try {
             const res = await axios.post('/api/comment/create', inputs);
             const {success, message} = res.data;
@@ -129,11 +130,11 @@ function Comment({param}){
     )
 }
 
-function ViewComment({param}){
+function ViewComment({param}) {
     const member = useRecoilValue(memberState);
     const comments = useRecoilValue(getComment(param));
-    const [ update, setUpdate ] = useState(false);
-    if(!comments) return null;
+    const [update, setUpdate] = useState(false);
+    if (!comments) return null;
 
     const TimeForToday = val => useTimeForToday(val);
     const onClick = async (val) => {
@@ -153,10 +154,12 @@ function ViewComment({param}){
         // }
     }
 
-    return(
-        comments.map((comment, index)=>{
-            const {nickname, description, createdAt, id} = comment;
-            console.log(id);
+    return (
+        comments.map((comment, index) => {
+            const {nickname, description, createdAt, id, memberId} = comment;
+            // console.log('memberid : ', member.id)
+            // console.log('cmemberid : ', memberId)
+            // console.log(id);
 
             return (
                 <div className="comment_view" key={index}>
@@ -165,46 +168,17 @@ function ViewComment({param}){
                             <span className="author">{nickname} · </span>
                             <span className="created">{TimeForToday(createdAt)}</span>
                         </div>
-                        {!member? null : member.nickname !== nickname ? null :
+                        {!member ? null : member.id !== memberId ? null :
                             <div className="buttons">
                                 <button className="button secondary update" onClick={() => setUpdate(true)}>수정</button>
                                 <button className="button secondary delete" onClick={() => onClick(id)}>삭제</button>
                             </div>
                         }
                     </div>
-                    {!update? <p>{description}</p> : null }
+                    {!update ? <p>{description}</p> : null}
 
                 </div>
             )
         })
-    )
-}
-
-function Next({param, array}){
-    const pathName = window.location.pathname.split('/')[1];
-    const lastIndex = array.length;
-    if (param === lastIndex) {
-        return null;
-    }
-    const link = `/${pathName}/${array[param].id}`
-    return (
-        <Link to={link} className="next">
-            <span>다음글</span>
-            <p>{array[param].title}</p>
-        </Link>
-    )
-}
-function Prev({param, array}){
-    const pathName = window.location.pathname.split('/')[1];
-    const firstIndex = 1;
-    if (param === firstIndex) {
-        return null;
-    }
-    const link = `/${pathName}/${array[param - 2].id}`
-    return (
-        <Link to={link} className="prev">
-            <span>이전글</span>
-            <p>{array[param - 2].title}</p>
-        </Link>
     )
 }
