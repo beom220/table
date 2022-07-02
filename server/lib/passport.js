@@ -13,13 +13,13 @@ module.exports = (app) => {
         // if(!user){
         //     return done(null, false, {message : 'is not user'})
         // }
-        console.log('serializeUser : ',user)
+        // console.log('serializeUser : ',user)
         done(null, user.email);
     });
     //  페이지방문시 세션Store정보를 조회
     passport.deserializeUser((id, done) => {
-        console.log('deserializeUser : ', id);
-        db.query(`SELECT id, email, grade
+        // console.log('deserializeUser : ', id);
+        db.query(`SELECT id, email, grade, nickname
                   FROM member
                   WHERE email = ?`, [id], (err, user) => {
             if (err) return done(null, false, {message: 'Sql Error'});
