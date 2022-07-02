@@ -15,7 +15,7 @@ export default function Free() {
                 <h1 className="title">Free Board</h1>
                 {!user ? null : <Link to='/free/create' className="button secondary">글쓰기</Link>}
             </div>
-            {topicLists.slice(0).reverse().map((list, index) => {
+            {topicLists.map((list, index) => {
                 return <Topic list={list} key={index}/>
             })}
         </div>
