@@ -184,6 +184,7 @@ input:-webkit-autofill:active {
   border-radius: 5px;
   font-size: 13px;
   cursor: pointer;
+  border: 1px solid #30363d;
 }
 .button.primary {
   background-color: #238636;
@@ -195,10 +196,24 @@ input:-webkit-autofill:active {
 .button.secondary {
   background-color: #21262d;
   color: #c9d1d9;
-  border: 1px solid #30363d;
 }
 .button.secondary:hover {
   background-color: #30363d;
+}
+.button.emphasis {
+  background-color: #1f6feb;
+  color: #fff;
+}
+.button.emphasis:hover {
+  background-color: #58a6ff;
+}
+.button.danger {
+  background-color: #21262d;
+  color: #f85149;
+}
+.button.danger:hover {
+  background-color: #da3633;
+  color: #fff;
 }
 
 .buttons {
@@ -334,6 +349,7 @@ input:-webkit-autofill:active {
   margin-left: 8px;
 }
 .comment_view p {
+  white-space: pre-wrap;
   font-size: 16px;
   margin-top: 4px;
 }
@@ -513,6 +529,7 @@ form button, form a {
   border-radius: 5px;
   padding: 8px 8px;
   cursor: pointer;
+  border: 1px solid #30363d;
 }
 form button.primary, form a.primary {
   background-color: #238636;
@@ -534,6 +551,14 @@ form button.emphasis, form a.emphasis {
 }
 form button.emphasis:hover, form a.emphasis:hover {
   background-color: #58a6ff;
+}
+form button.danger, form a.danger {
+  background-color: #21262d;
+  color: #f85149;
+}
+form button.danger:hover, form a.danger:hover {
+  background-color: #da3633;
+  color: #fff;
 }
 
 body {

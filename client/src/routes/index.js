@@ -6,6 +6,7 @@ import { Notfound } from "../pages/utils/utils";
 import Register from "../pages/member/Register";
 import {useRecoilValue} from "recoil";
 import {memberState} from "../recoil/member/authorize";
+import AdminMain from "../pages/admin/main";
 
 
 function PublicRoute(){
@@ -30,7 +31,7 @@ function PrivateRoute(){
         <Routes>
             <Route path="/free/*" element={<FreeRoutes/>}/>
             {/*<Route path="/login" element={<Login/>}/>*/}
-            <Route path="/" exact element={<Main/>}/>
+            <Route path="/" exact element={<AdminMain/>}/>
             {/*<Route path="/register" element={<Register/>}/>*/}
             <Route path="*" element={<Notfound/>}/>
         </Routes>
@@ -38,4 +39,4 @@ function PrivateRoute(){
 }
 
 
-export { PublicRoute }
+export { PublicRoute, PrivateRoute }

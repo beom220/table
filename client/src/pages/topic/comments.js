@@ -1,22 +1,23 @@
 import {useRecoilRefresher_UNSTABLE, useRecoilValue} from "recoil";
 import {getComment} from "../../recoil/topic/topic";
 import {memberState} from "../../recoil/member/authorize";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import axios from "axios";
 import {useTimeForToday} from "../../components/utils/today";
 
-function WriteComment({param}) {
+function WriteComment({listNum}) {
     const member = useRecoilValue(memberState);
-    const commentsUpdate = useRecoilRefresher_UNSTABLE(getComment(param));
+    const commentsUpdate = useRecoilRefresher_UNSTABLE(getComment(listNum));
     const [inputs, setInputs] = useState({
         description: '',
         memberId: member?.id || '',
-        topicId: param,
+        topicId: listNum,
     });
 
     useEffect(() => {
-        setInputs({...inputs, description: ''});
-    }, [param])
+        setInputs({...inputs, description: '', topicId: listNum});
+    }, [listNum])
+
 
     const onChange = (e) => {
         const {value, name} = e.target;
@@ -26,10 +27,16 @@ function WriteComment({param}) {
         });
     }
 
+    const blank_pattern = /^\s+$/g;
+
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!member) {
             alert('로그인하세용ㅎ');
+            return;
+        }
+        if(blank_pattern.test(inputs.description) || inputs.description === '') {
+            alert('댓글을 입력해주세요');
             return;
         }
         try {
@@ -41,7 +48,8 @@ function WriteComment({param}) {
                 return alert(message);
             }
             commentsUpdate();
-            return alert(message);
+            setInputs({...inputs, description: ''});
+            alert(message);
         } catch (err) {
             console.error(err.message);
         }
@@ -59,8 +67,8 @@ function WriteComment({param}) {
     )
 }
 
-function ViewComments({param}) {
-    const comments = useRecoilValue(getComment(param));
+function ViewComments({listNum}) {
+    const comments = useRecoilValue(getComment(listNum));
     if (!comments) return null;
 
     return (
@@ -127,7 +135,7 @@ function ViewComment({comment}){
                     {!allow? null :
                         <div className="buttons">
                             <button className="button secondary update" onClick={() => setUpdate(true)}>수정</button>
-                            <button className="button secondary delete">삭제</button>
+                            <button className="button danger delete">삭제</button>
                         </div>
                     }
                 </div>

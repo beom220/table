@@ -37,7 +37,7 @@ function Header(){
         <header>
             <Link to="/" className="logo"><img src={logo} alt="logo"/></Link>
             <div className="utils">
-                <Link to='/mypage' className='button primary'>My page</Link>
+                {member?.grade !== 5 ? <Link to='/mypage' className='button primary'>My page</Link> : <Link to='/mypage' className='button emphasis'>관리자</Link>}
                 <button className="button secondary" type="button" onClick={logOut}>Logout</button>
             </div>
         </header>

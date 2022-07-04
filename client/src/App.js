@@ -1,5 +1,5 @@
-import {useRecoilRefresher_UNSTABLE, useRecoilValue} from "recoil";
-import {Suspense, lazy, useEffect} from "react";
+import {useRecoilValue} from "recoil";
+import {Suspense} from "react";
 import {BrowserRouter} from "react-router-dom";
 import {ErrorBoundary} from "react-error-boundary";
 import {DebugObserver} from "./components/utils/debug";
@@ -12,15 +12,8 @@ import Contents from "./components/contents";
 
 
 export default function App() {
-    // // const member = useRecoilValue(memberState);
-    // const memberRefresh = useRecoilRefresher_UNSTABLE(memberState);
-    // const member = memberRefresh();
-    // // memberRefresh();
-    // // useEffect(()=>{
-    // //     memberRefresh();
-    // // },[member])
-    // // console.log(member)
-
+    const member = useRecoilValue(memberState);
+    console.log(member?.grade);
     return (
 
         <Suspense fallback={<Loading/>}>
@@ -32,7 +25,10 @@ export default function App() {
                     <ErrorBoundary fallback={<Error/>}>
                         <Suspense fallback={<Loading/>}>
                             <Contents>
-                                <PublicRoute/>
+                                {member?.grade === 5 ?
+                                    <PrivateRoute/> :
+                                    <PublicRoute/>
+                                }
                             </Contents>
                         </Suspense>
                     </ErrorBoundary>

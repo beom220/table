@@ -40,8 +40,8 @@ export default function FreeView() {
 
             {!list.useComment ? null :
                 <>
-                    <WriteComment param={param}/>
-                    <ViewComments param={param}/>
+                    <WriteComment listNum={list.id}/>
+                    <ViewComments listNum={list.id}/>
                 </>
             }
         </div>

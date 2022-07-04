@@ -77,10 +77,10 @@ export default function Register() {
     // TODO 생성한 정보로 로그인하기
     const onSubmit = async (e) => {
         e.preventDefault();
-        if(!formCheck()) return false;
+        if(!formCheck()) return;
 
         try {
-            const res = await axios.post('/register', inputs);
+            const res = await axios.post('/api/register', inputs);
             const {success, message} = res.data;
 
             if(!success){
@@ -88,9 +88,9 @@ export default function Register() {
                 return alert(message);
             }
             alert(message);
-            return navigate('/');
-        } catch (err) {
-            console.error(err.message);
+            navigate('/');
+        } catch (error) {
+            console.error(error.message);
         }
     }
 
