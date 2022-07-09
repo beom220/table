@@ -7,6 +7,7 @@ import {useEffect} from "react";
 import Pager from "../../components/utils/pager";
 import {ViewComments, WriteComment} from "./comments";
 
+function scrollTop(){document.documentElement.scrollTop = 0}
 
 export default function FreeView() {
     const params = useParams();
@@ -14,8 +15,6 @@ export default function FreeView() {
     const list = useRecoilValue(getTopic(param));
     const topicLists = useRecoilValue(getTopicsLists);
     const fullDate = useFullDate(list.createdAt);
-
-    function scrollTop(){document.documentElement.scrollTop = 0}
 
     useEffect(() => {
         scrollTop();

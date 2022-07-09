@@ -1,6 +1,10 @@
 import {Link} from "react-router-dom";
 
 export default function Pager({current, arr}) {
+    /*
+    * current : 현재 페이지의 위치
+    * arr : lists
+    * */
     return (
         <div className="pager">
             <Prev current={current} arr={arr}/>

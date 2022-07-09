@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require("../lib/db");
 const path = require("path");
+// const {query} = require("express");
 
 // router.post('/free/update/:free_id', (req, res) => {
 //     const freeId = path.parse(req.params.free_id).base;
@@ -82,6 +83,12 @@ router.get('/free/:free_id', (req, res, next) => {
                 })
                 return next(error);
             }
+            if(!rows.length){
+                res.send({
+                    success: true,
+                    message : 'last data'
+                })
+            }
             res.send({
                 success: true,
                 message: rows[0]
@@ -91,13 +98,19 @@ router.get('/free/:free_id', (req, res, next) => {
     )
 });
 
-router.get('/free', (req, res, next) => {
+router.get('/free?:limit', (req, res, next) => {
+    // const limit = Number(req.query.limit);
+    // console.log(limit)
     // const sqlQuery = `SELECT free.id, title, description, nickname
     //                   FROM free LEFT JOIN member ON free.memberId = member.id`;
     const sqlQuery = `SELECT free.id, title, description, useComment, disabled, free.createdAt, member.nickname, memberId
                       FROM free
-                               LEFT JOIN member ON free.memberId = member.id WHERE disabled='0' ORDER BY createdAt DESC`;
-    db.query(sqlQuery, (error, rows) => {
+                      LEFT JOIN member 
+                      ON free.memberId = member.id 
+                      WHERE disabled='0'
+                      ORDER BY createdAt DESC
+                      LIMIT 0, ?`;
+    db.query(sqlQuery, [10], (error, rows) => {
             if (error) {
                 res.send({
                     success: false,
