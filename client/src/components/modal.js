@@ -36,8 +36,8 @@ function ModalConfirm({action, children, closed}) {
                     </div>
                 </div>
                 <div className="buttons">
-                    <div className="button secondary" onClick={onClose}>취소</div>
-                    <div className="button primary" onClick={onSuccess}>확인</div>
+                    <button className="button secondary" onClick={onClose} type="button">취소</button>
+                    <button className="button primary" onClick={onSuccess} type="button">확인</button>
                 </div>
             </div>
         </>
@@ -63,7 +63,7 @@ function ModalAlert({children, closed}){
                     </div>
                 </div>
                 <div className="buttons">
-                    <div className="button primary" onClick={onClose}>확인</div>
+                    <button className="button primary" onClick={onClose} type="button">확인</button>
                 </div>
             </div>
         </>

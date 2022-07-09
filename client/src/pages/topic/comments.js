@@ -4,6 +4,7 @@ import {memberState} from "../../recoil/member/authorize";
 import {useEffect, useState, useCallback} from "react";
 import axios from "axios";
 import {useTimeForToday} from "../../components/utils/today";
+import {ModalConfirm, useModal} from "../../components/modal";
 
 function WriteComment({listNum}) {
     const member = useRecoilValue(memberState);
@@ -30,7 +31,7 @@ function WriteComment({listNum}) {
     const blank_pattern = /^\s+$/g;
 
     const onSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if (!member) {
             alert('로그인하세용ㅎ');
             return;
@@ -54,14 +55,22 @@ function WriteComment({listNum}) {
             console.error(err.message);
         }
     }
+
+    const  [toggleModal, triggerModal, modalMessage, setModalMessage] = useModal();
+
+    useEffect(()=>{
+        setModalMessage({title : '댓글을 작성하시겠습니까?'})
+    },[setModalMessage])
+
     return (
         <div className="comment">
-            <form action="" onSubmit={onSubmit}>
+            <form onSubmit={triggerModal}>
                 <h4>댓글달기</h4>
                 <textarea name="description" placeholder="댓글을 입력해주세요" onChange={onChange} value={inputs.description}/>
                 <div className="buttons right">
-                    <button className="button primary" type="submit">댓글달기</button>
+                    <button className="button primary" type="button" onClick={triggerModal}>댓글달기</button>
                 </div>
+                {toggleModal && <ModalConfirm children={modalMessage} closed={triggerModal} action={onSubmit}/>}
             </form>
         </div>
     )

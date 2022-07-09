@@ -396,6 +396,7 @@
   height: 100vh;
   top: 0;
   left: 0;
+  z-index: 9999;
   background-color: rgba(0, 0, 0, .6);
   color: #fff;
   display: flex;
@@ -410,6 +411,7 @@
   //top : 50%;
   left: 50%;
   bottom: 50%;
+  z-index: 10000;
   transform: translate(-50%, 50%);
   animation-name: slideUp;
   animation-duration:.4s;

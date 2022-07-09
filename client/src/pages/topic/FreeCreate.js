@@ -1,11 +1,11 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useRecoilValue, useRecoilRefresher_UNSTABLE} from "recoil";
 import {memberState} from "../../recoil/member/authorize";
 import {getTopicsLists} from "../../recoil/topic/topic";
 import ShowMarkDown from "../../components/markdown";
-import {ModalConfirm} from "../utils/utils";
+import {ModalConfirm, useModal} from "../../components/modal";
 
 
 export default function FreeCreate(){
@@ -41,7 +41,7 @@ export default function FreeCreate(){
 
 
     const onSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const res = await axios.post('/api/topics/free/create', inputs);
             const {success, message, topicId} = res.data;
@@ -58,12 +58,17 @@ export default function FreeCreate(){
         }
     }
 
+    const  [toggleModal, triggerModal, modalMessage, setModalMessage] = useModal();
+
+    useEffect(()=>{
+        setModalMessage({title : '글을 작성하시겠습니까?'})
+    },[setModalMessage])
+
 
     if(!freeView){
         return (
             <>
-                <form action="" onSubmit={onSubmit}>
-                    <input type="text" name="memberId" value={memberId} readOnly/>
+                <form>
                     <input type="text" name="title" placeholder="글 제목을 입력해주세요" value={title} onChange={onChange}/>
                     <textarea name="description" onChange={onChange} value={description} placeholder="글 내용을 입력해주세요"/>
                     <div className="side-by-side">
@@ -92,8 +97,9 @@ export default function FreeCreate(){
                             </button>
                         </div>
                     </div>
-                    <button type="submit" className='primary'>작성 완료</button>
+                    <button type="button" className='primary' onClick={triggerModal}>작성 완료</button>
                     <button type="button" className='secondary' onClick={() => navigate(-1)}>뒤로가기</button>
+                    {toggleModal && <ModalConfirm children={modalMessage} closed={triggerModal} action={onSubmit}/>}
                 </form>
             </>
         )
