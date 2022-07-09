@@ -13,9 +13,8 @@ import Contents from "./components/contents";
 
 export default function App() {
     const member = useRecoilValue(memberState);
-    console.log(member?.grade);
-    return (
 
+    return (
         <Suspense fallback={<Loading/>}>
             <DebugObserver/>
             <BrowserRouter>

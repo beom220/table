@@ -215,6 +215,12 @@ input:-webkit-autofill:active {
   background-color: #da3633;
   color: #fff;
 }
+.button.full {
+  width: 100%;
+}
+.button.large {
+  padding: 12px 16px;
+}
 
 .buttons {
   display: flex;
@@ -378,12 +384,18 @@ input:-webkit-autofill:active {
   align-items: center;
   justify-content: center;
 }
+.dimmed.closed {
+  display: none;
+}
 
 .modal-popup {
   position: fixed;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  animation-name: slideUp;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
   background: #0d1117;
   width: 340px;
   border: 1px solid #30363d;
@@ -407,7 +419,34 @@ input:-webkit-autofill:active {
   font-size: 16px;
   border: 0;
 }
+.modal-popup.closed {
+  bottom: -100%;
+  transform: translate(-50%, 0);
+  animation-name: slideDown;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
+}
 
+@keyframes slideUp {
+  0% {
+    bottom: 0;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+@keyframes slideDown {
+  0% {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+  }
+  100% {
+    bottom: 0;
+    transform: translate(-50%, 0);
+  }
+}
 .login-form {
   position: fixed;
   top: 50%;
@@ -559,6 +598,12 @@ form button.danger, form a.danger {
 form button.danger:hover, form a.danger:hover {
   background-color: #da3633;
   color: #fff;
+}
+form button.full, form a.full {
+  width: 100%;
+}
+form button.large, form a.large {
+  padding: 12px 16px;
 }
 
 body {

@@ -1,10 +1,12 @@
 import {NavLink} from "react-router-dom";
+import pages from "./utils/pages";
 
 export function Navigation(){
     return (
-        <div className="navigation">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/free">Free</NavLink>
-        </div>
+        <nav className="navigation">
+            {pages.map((v, i)  => {
+                return <NavLink to={v.link} key={i}>{v.name}</NavLink>
+            })}
+        </nav>
     )
 }

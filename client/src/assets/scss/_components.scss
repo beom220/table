@@ -162,6 +162,14 @@
       color: color.$button-text-danger-hover;
     }
   }
+
+
+  &.full{
+    width: 100%;
+  }
+  &.large{
+    padding: 12px 16px;
+  }
 }
 
 .navigation {
@@ -393,12 +401,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &.closed{
+    display: none;
+  }
 }
 .modal-popup{
   position : fixed;
-  top : 50%;
+  //top : 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  animation-name: slideUp;
+  animation-duration:.4s;
+  animation-timing-function: ease-out;
   background: #0d1117;
   width: 340px;
   border : 1px solid color.$border-default;
@@ -420,5 +435,34 @@
     text-align: center;
     font-size: 16px;
     border: 0;
+  }
+  &.closed{
+    bottom: -100%;
+    transform: translate(-50%, 0);
+    animation-name: slideDown;
+    animation-duration:.4s;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    bottom: 0;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+  }
+  100% {
+    bottom: 0;
+    transform: translate(-50%, 0);
   }
 }
